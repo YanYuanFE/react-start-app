@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>enterprise-react</title>
+  <meta name="description" content="enterprise-react">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+  <% for (var css in htmlWebpackPlugin.files.css) { %>
+  <link href="<%=htmlWebpackPlugin.files.css[css] %>" rel="stylesheet">
+  <% } %>
+
+  <!--[if lte IE 9]>
+  <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+  <% if (/.*ieCompatible.*\.js$/.test(htmlWebpackPlugin.files.chunks[chunk].entry)) { %>
+  <script src="<%=htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+  <% } %>
+  <% } %>
+  <![endif]-->
+</head>
+<body>
+  <div id="root"></div>
+  <% if(htmlWebpackPlugin.files.webpackManifest){ %>
+    <%=htmlWebpackPlugin.files.webpackManifest%>
+  <% } %>
+  <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+  <% if (!/.*ieCompatible.*\.js$/.test(htmlWebpackPlugin.files.chunks[chunk].entry)) { %>
+  <script src="<%=htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+  <% } %>
+  <% } %>
+</body>
+</html>

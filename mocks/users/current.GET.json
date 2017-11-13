@@ -1,0 +1,8 @@
+{
+	"success": true,
+	"msg": "获取成功",
+	"data": {
+		"id": 1,
+		"name": "xx"
+	}
+}
