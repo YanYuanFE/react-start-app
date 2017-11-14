@@ -1,42 +1,21 @@
-# Logs
-logs
-*.log
+# See https://help.github.com/ignore-files/ for more about ignoring files.
 
-# Coverage directory used by tools like istanbul
-coverage
+# dependencies
+/node_modules
 
-# node-waf configuration
-.lock-wscript
+# testing
+/coverage
 
-# Dependency directory
-# https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
-node_modules
+# production
+/build
 
-# Node.JS specifics
-pids
-lib-cov
-*.seed
-*.csv
-*.dat
-*.out
-*.pid
-*.gz
-
-results
-
-# MacOSX specifics
+# misc
 .DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# Build artifacts
-tmp
-bower_components
-dist
-.sass-cache
-build/Release
-
-# IDE specifics
-.idea
-
-# temp files
-.tmp
-mock
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

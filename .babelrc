@@ -1,4 +1,3 @@
 {
-    "plugins": ["syntax-async-functions", "transform-decorators-legacy", "transform-object-assign", "react-hot-loader/babel"],
-    "presets": ["es2015", "stage-0", "react"]
-  }
+  "presets":["react","env"]
+}
