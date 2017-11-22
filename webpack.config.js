@@ -6,8 +6,6 @@ const PurifyCSSPlugin = require('purifycss-webpack');
 const path = require('path');
 const glob = require('glob');
 
-console.log( encodeURIComponent(process.env.type) );
-
 var website = {
   publicPath: 'http://127.0.0.1:3000/'
 }
@@ -16,6 +14,10 @@ if (process.env.type == 'build') {
   var website = {
     publicPath: 'http://127.0.0.1:3000/'
   }
+}
+
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
 }
 
 module.exports = {
