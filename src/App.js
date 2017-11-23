@@ -1,27 +1,39 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Provider } from 'react-redux';
 import {
-  BrowserRouter as Router,
+  Router,
   Route,
-  Link
+  Switch
 } from 'react-router-dom';
-import logo from './logo.svg';
-import './css/App.scss';
-import routes from './routes';
+import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux';
+import createHistory from 'history/createBrowserHistory';
+import { connect } from 'react-redux';
 
-class App extends Component {
+import Home from "./containers/Home";
+import About from "./containers/About";
+import Topics from "./containers/Topics";
+import Topic from "./containers/Topic";
+
+import configStore from './redux';
+
+const store = configStore();
+
+const history = createHistory();
+
+class App extends React.Component{
   render() {
+    var match = this.props.match;
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <div className="img"></div>
-      </div>
-    );
+      <Provider store={store}>
+        <ConnectedRouter history={history}>
+          <Switch>
+            <Route exact path="/" component={Home}></Route>
+            <Route path="/about" component={Home}></Route>
+            <Route path="/topics" component={Topics}></Route>
+          </Switch>
+        </ConnectedRouter>
+      </Provider>
+    )
   }
 }
 

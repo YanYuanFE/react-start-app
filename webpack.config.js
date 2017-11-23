@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const uglify = require('uglifyjs-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const PurifyCSSPlugin = require('purifycss-webpack');
 const path = require('path');
@@ -24,10 +25,11 @@ module.exports = {
   devtool: 'eval-source-map',
   entry: {
     app: './src/index.js',
+    vendor: ['react', 'react-dom', 'react-router-dom', 'redux', 'react-redux', 'axios']
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[app].js'
+    filename: '[name].[chunkhash].js'
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
@@ -39,6 +41,14 @@ module.exports = {
   },
   module: {
     rules: [{
+        test: /\.(jsx|js)$/,
+        use: [{
+          loader: 'eslint-loader',
+          options: { fix: true }
+        }],
+        include: path.resolve(__dirname, './src/**/*.js'),
+        exclude: /node_modules/
+      }, {
         test: /\.(jsx|js)$/,
         use: {
           loader: 'babel-loader',
@@ -82,6 +92,14 @@ module.exports = {
 
   },
   plugins: [
+    new CleanWebpackPlugin(['dist/app.*.js', 'dist/manifest.*.js'], {
+      verbose: true,
+      dry: false
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      names: ['vendor', 'manifest'],
+      minChunks: Infinity
+    }),
     new HtmlWebpackPlugin({
       minify: {
         remoAttributeQuotes: true
@@ -93,9 +111,11 @@ module.exports = {
     // new PurifyCSSPlugin({
     //   paths: glob.sync(path.join(__dirname, 'src/*.html')),
     // }),
-    new uglify()
+    new UglifyJSPlugin(),
+    new webpack.optimize.ModuleConcatenationPlugin()
   ],
   devServer: {
+    historyApiFallback: true,
     contentBase: path.resolve(__dirname, 'dist'),
     host: 'localhost',
     compress: true,

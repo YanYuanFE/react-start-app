@@ -1,3 +1,12 @@
+import React from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom';
+
+import Topic from '../Topic';
+
 const Topics = ({ match }) => (
   <div>
     <h2>主题列表</h2>
@@ -18,10 +27,9 @@ const Topics = ({ match }) => (
         </Link>
       </li>
     </ul>
-
     <Route path={`${match.url}/:topicId`} component={Topic}/>
     <Route exact path={match.url} render={() => (
-      <h3>请选择一个主题。</h3>
+      <h3>Please select a topic.</h3>
     )}/>
   </div>
 )
