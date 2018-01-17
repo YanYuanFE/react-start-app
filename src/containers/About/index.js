@@ -16,6 +16,6 @@ const About = () => (
       <Fruits/>
     </ul>
   ]
-)
+);
 
 export default About;

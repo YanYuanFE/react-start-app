@@ -56,7 +56,7 @@
       // http://eslint.org/docs/rules/no-var
       "prefer-const": 0,
       // http://eslint.org/docs/rules/prefer-const
-  
+
       /**
        * Variables
        */
@@ -76,7 +76,7 @@
       ],
       "no-use-before-define": 2,
       // http://eslint.org/docs/rules/no-use-before-define
-  
+
       /**
        * Possible errors
        */
@@ -123,7 +123,7 @@
       // http://eslint.org/docs/rules/use-isnan
       "block-scoped-var": 2,
       // http://eslint.org/docs/rules/block-scoped-var
-  
+
       /**
        * Best practices
        */
@@ -212,7 +212,7 @@
       // http://eslint.org/docs/rules/wrap-iife
       "yoda": 2,
       // http://eslint.org/docs/rules/yoda
-  
+
       /**
        * Style
        */
@@ -359,7 +359,7 @@
       "react/no-did-update-set-state": 2,
       "react/no-multi-comp": 2,
       "react/no-unknown-property": 2,
-      "react/prop-types": 2,
+      "react/prop-types": 0,
       "react/react-in-jsx-scope": 2,
       "react/self-closing-comp": 2,
       "react/sort-comp": 2,
@@ -369,4 +369,3 @@
       "react"
     ]
   }
-  

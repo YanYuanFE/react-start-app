@@ -1,39 +1,38 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import {
-  Router,
+  BrowserRouter,
   Route,
   Switch
 } from 'react-router-dom';
-import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux';
-import createHistory from 'history/createBrowserHistory';
-import { connect } from 'react-redux';
 
-import Home from './containers/Home';
+// import AuthRoute from './components/authroute';
+import Home from './containers/dashboard';
 import About from './containers/About';
-import Topics from './containers/Topics';
-import Topic from './containers/Topic';
+import Login from './containers/login';
+import Register from './containers/register';
 
 import configStore from './redux';
 
 const store = configStore();
 
-const history = createHistory();
-
-class App extends React.Component{
+class App extends React.Component {
   render() {
-    var match = this.props.match;
     return (
       <Provider store={store}>
-        <ConnectedRouter history={history}>
+        <BrowserRouter>
           <Switch>
-            <Route exact path="/" component={Home}></Route>
-            <Route path="/about" component={About}></Route>
-            <Route path="/topics" component={Topics}></Route>
+            {
+              /* <AuthRoute/> */
+            }
+            <Route exact path="/" component={Home} />
+            <Route path="/about" component={About} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
           </Switch>
-        </ConnectedRouter>
+        </BrowserRouter>
       </Provider>
-    )
+    );
   }
 }
 

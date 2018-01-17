@@ -1,8 +1,8 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux';
-import { userInfo } from './userInfo';
+import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
+import { userInfo } from './user';
 
 export default combineReducers({
   userInfo,
   router: routerReducer
-})
+});
