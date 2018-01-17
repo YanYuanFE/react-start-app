@@ -9,10 +9,10 @@ import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-ro
 import createHistory from 'history/createBrowserHistory';
 import { connect } from 'react-redux';
 
-import Home from "./containers/Home";
-import About from "./containers/About";
-import Topics from "./containers/Topics";
-import Topic from "./containers/Topic";
+import Home from './containers/Home';
+import About from './containers/About';
+import Topics from './containers/Topics';
+import Topic from './containers/Topic';
 
 import configStore from './redux';
 
@@ -28,7 +28,7 @@ class App extends React.Component{
         <ConnectedRouter history={history}>
           <Switch>
             <Route exact path="/" component={Home}></Route>
-            <Route path="/about" component={Home}></Route>
+            <Route path="/about" component={About}></Route>
             <Route path="/topics" component={Topics}></Route>
           </Switch>
         </ConnectedRouter>

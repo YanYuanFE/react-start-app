@@ -119,7 +119,7 @@ module.exports = {
     contentBase: path.resolve(__dirname, 'dist'),
     host: 'localhost',
     compress: true,
-    port: 3000,
+    port: 3001,
     publicPath: website.publicPath
   }
 }
