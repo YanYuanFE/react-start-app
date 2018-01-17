@@ -19,7 +19,8 @@
     "lint": "eslint --ext .js src",
     "server": "webpack-dev-server --progress",
     "dev": "export type=dev&webpack",
-    "build": "export type=build&webpack"
+    "build": "export type=build&webpack",
+    "eject": "react-scripts eject"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.6",
