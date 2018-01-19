@@ -1,24 +1,40 @@
-import * as actinTypes from '../actions/actionTypes';
+import * as actionTypes from '../actionTypes';
 
 const initialState = {
-  page: 0,
-  comments: []
+  isAuth: false,
+  redirectTo: '',
+  msg: '',
+  user: '',
+  type: ''
 };
 
-export const userInfo = (state = initialState, action) => {
+export const user = (state = initialState, action) => {
   switch(action.type) {
-  case actinTypes.USER_CURRENTCITY:
+  case actionTypes.REGISTER_SUCCESS:
     return {
       ...state,
-      cityName: action.payload.cityName,
-      userName: '小明'
+      msg: '',
+      isAuth: true,
+      ...action.payload
     };
-  case actinTypes.GET_COMMENT_LIST:
+  case actionTypes.LOGIN_SUCCESS:
     return {
       ...state,
-      comments: action.payload.comments
+      msg: '',
+      isAuth: true,
+      ...action.payload
     };
-
+  case actionTypes.LOAD_DATA:
+    return {
+      ...state,
+      ...action.payload
+    };
+  case actionTypes.ERROR_MSG:
+    return {
+      ...state,
+      isAuth: false,
+      ...action.payload
+    };
   default:
     return state;
   }

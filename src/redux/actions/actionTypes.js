@@ -1,3 +1,0 @@
-export const USER_CURRENTCITY =  'USER_CURRENTCITY';
-export const GET_ORDER_LIST = 'GET_ORDER_LIST';
-export const GET_COMMENT_LIST = 'GET_COMMENT_LIST';
