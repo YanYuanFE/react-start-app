@@ -2,17 +2,28 @@ import React, { Component } from 'react';
 import {
   Link
 } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Input from '../../components/input';
 import Button from '../../components/button';
+import { register } from 'actions/user';
 
+@connect(
+  state => state.user,
+  { register }
+)
 class Register extends Component {
   state = {
     username: '',
     password: '',
     confirmPsw: ''
   };
+
   handleChange = (e, type) => {
     this.setState({ [type]: e.target.value.trim() });
+  }
+
+  handleRegister = () => {
+    this.props.register(this.state);
   }
 
   render() {
@@ -23,7 +34,7 @@ class Register extends Component {
             labelText="用户名"
             inputName="username"
             inputType="text"
-            handleChange={(e) => this.handleChange(e, 'name')}
+            handleChange={(e) => this.handleChange(e, 'username')}
             value={this.state.username}
           />
           <Input
@@ -42,7 +53,7 @@ class Register extends Component {
           />
           <div className="bottom">
             <div className="btn-wrapper">
-              <Button type="primary">注册</Button>
+              <Button type="primary" onClick={this.handleRegister}>注册</Button>
             </div>
             <div className="login">
               <Link to="/user/login">使用已有账户登录</Link>

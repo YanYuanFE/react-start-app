@@ -1,20 +1,28 @@
-import React from 'react';
-import {
-  Link
-} from 'react-router-dom';
+import React, { Component } from 'react';
+import './style.scss';
+// import {
+//   Link
+// } from 'react-router-dom';
 
 
-const Comment = ({ text }) => text.replace(':)', '[smile]');
+class DashBoard extends Component {
+  render() {
+    return (
+      <div className="dashboard-container">
+        <header>
+          <h1>首页</h1>
+        </header>
+        <div className="main">
+          <div className="left">
+           111
+          </div>
+          <div className="right">
+111
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
 
-const Home = () => (
-  <div>
-    <h2>首页</h2>
-    <ul>
-      <li><Link to="/topics">Bus</Link></li>
-      <li><Link to="/about">Cart</Link></li>
-    </ul>
-    <Comment text="Text only components are awesome :)"/>
-  </div>
-);
-
-export default Home;
+export default DashBoard;

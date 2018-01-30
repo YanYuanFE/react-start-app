@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 // import AuthRoute from './components/authroute';
-import Home from './containers/dashboard';
+import DashBoard from './containers/dashboard';
 import User from './containers/user';
 
 import configStore from './redux';
@@ -24,7 +24,7 @@ class App extends React.Component {
             {
               /* <AuthRoute/> */
             }
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" component={DashBoard} />
             <Route path="/user" component={User} />
           </Switch>
         </BrowserRouter>

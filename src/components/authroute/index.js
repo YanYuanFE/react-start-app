@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
-import { loadData } from '../../redux/actions';
+import { loadData } from '../../redux/actions/user';
 import { connect } from 'react-redux';
 
 @withRouter
