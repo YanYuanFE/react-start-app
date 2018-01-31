@@ -6,27 +6,24 @@ import {
   Switch
 } from 'react-router-dom';
 
-// import AuthRoute from './components/authroute';
+import AuthRoute from './components/authroute';
 import DashBoard from './containers/dashboard';
 import User from './containers/user';
 
-import configStore from './redux';
-
-
-const store = configStore();
+import store from './redux';
 
 class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
         <BrowserRouter>
-          <Switch>
-            {
-              /* <AuthRoute/> */
-            }
-            <Route exact path="/" component={DashBoard} />
-            <Route path="/user" component={User} />
-          </Switch>
+          <div>
+            <AuthRoute/>
+            <Switch>
+              <Route exact path="/" component={DashBoard} />
+              <Route path="/user" component={User} />
+            </Switch>
+          </div>
         </BrowserRouter>
       </Provider>
     );

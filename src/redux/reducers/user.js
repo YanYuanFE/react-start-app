@@ -2,7 +2,7 @@ import * as actionTypes from '../actionTypes';
 
 const initialState = {
   isAuth: false,
-  redirectTo: '',
+  redirectTo: '/',
   msg: '',
   user: '',
   type: ''
@@ -33,6 +33,11 @@ export const user = (state = initialState, action) => {
     return {
       ...state,
       isAuth: false,
+      ...action.payload
+    };
+  case actionTypes.RECORD_PATH:
+    return {
+      ...state,
       ...action.payload
     };
   default:

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {
-  Link
+  Link,
+  Redirect
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Input from '../../components/input';
@@ -13,9 +14,9 @@ import { register } from 'actions/user';
 )
 class Register extends Component {
   state = {
-    username: '',
-    password: '',
-    confirmPsw: ''
+    user: '',
+    pwd: '',
+    repeatpwd: ''
   };
 
   handleChange = (e, type) => {
@@ -29,27 +30,31 @@ class Register extends Component {
   render() {
     return (
       <div className="register-container">
+        {
+          (this.props.redirectTo && this.props.redirectTo !== '/user/register') ?
+            <Redirect to={this.props.redirectTo} /> : null
+        }
         <div className="form">
           <Input
             labelText="用户名"
             inputName="username"
             inputType="text"
-            handleChange={(e) => this.handleChange(e, 'username')}
-            value={this.state.username}
+            handleChange={(e) => this.handleChange(e, 'user')}
+            value={this.state.user}
           />
           <Input
             labelText="密码"
             inputName="password"
             inputType="password"
-            handleChange={(e) => this.handleChange(e, 'password')}
-            value={this.state.password}
+            handleChange={(e) => this.handleChange(e, 'pwd')}
+            value={this.state.pwd}
           />
           <Input
             labelText="确认密码"
             inputName="confirmPsw"
             inputType="password"
-            handleChange={(e) => this.handleChange(e, 'confirmPsw')}
-            value={this.state.confirmPsw}
+            handleChange={(e) => this.handleChange(e, 'repeatpwd')}
+            value={this.state.repeatpwd}
           />
           <div className="bottom">
             <div className="btn-wrapper">

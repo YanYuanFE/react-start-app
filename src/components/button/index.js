@@ -13,7 +13,7 @@ export default class Button extends Component {
 
 
     return (
-      <button className={`btn btn-${type}`} >{children}</button>
+      <button className={`btn btn-${type}`} {...this.props}>{children}</button>
     );
   }
 }

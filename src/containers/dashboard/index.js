@@ -14,10 +14,13 @@ class DashBoard extends Component {
         </header>
         <div className="main">
           <div className="left">
-           111
+            <div className="message-area">
+              <textarea />
+              <div className="send-btn">发送</div>
+            </div>
           </div>
           <div className="right">
-111
+            <div className="title">在线用户</div>
           </div>
         </div>
       </div>

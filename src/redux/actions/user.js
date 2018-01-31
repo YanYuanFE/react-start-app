@@ -31,8 +31,16 @@ export function loadData(userInfo) {
   };
 }
 
+export function recordPath(redirectTo) {
+  return {
+    type: actionTypes.RECORD_PATH,
+    payload: redirectTo
+  };
+}
+
 
 export function register({ user, pwd, repeatpwd }) {
+  console.log(user);
   if (!user || !pwd) {
     return errorMsg('用户名密码必须输入');
   }
@@ -42,8 +50,8 @@ export function register({ user, pwd, repeatpwd }) {
   return dispatch => {
     axios.post(API.REGISTER, { user, pwd })
       .then(res => {
-        if (res.status === SUCCESS && res.code === ERR_OK) {
-          dispatch(registerSuccess({ user, pwd }));
+        if (res.status === SUCCESS && res.data.code === ERR_OK) {
+          dispatch(registerSuccess(res.data.data));
         } else {
           dispatch(errorMsg(res.data.msg));
         }
@@ -58,8 +66,8 @@ export function login({ user, pwd }) {
   return dispatch => {
     axios.post(API.LOGIN, { user, pwd })
       .then(res => {
-        if (res.status === SUCCESS && res.code === ERR_OK) {
-          dispatch(loginSuccess({ user, pwd }));
+        if (res.status === SUCCESS && res.data.code === ERR_OK) {
+          dispatch(loginSuccess(res.data.data));
         } else {
           dispatch(errorMsg(res.data.msg));
         }

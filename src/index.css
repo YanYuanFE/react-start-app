@@ -7,7 +7,7 @@ body {
   background-color: #fff;
 }
 
-#root, body, html {
+#root, body, html, #root>div {
   height: 100%;
 }
 

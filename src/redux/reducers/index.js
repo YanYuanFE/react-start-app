@@ -1,8 +1,6 @@
-import redux from 'redux';
+import { combineReducers } from 'redux';
 import { user } from './user';
 
-console.log(redux);
-
-export default redux.combineReducers({
+export default combineReducers({
   user
 });

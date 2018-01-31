@@ -1,6 +1,7 @@
 const API = {
-  LOGIN: '/user/login',
-  REGISTER: '/user/register'
+  LOGIN: '/api/user/login',
+  REGISTER: '/api/user/register',
+  USERINFO: '/api/user/info',
 };
 
 export default API;
