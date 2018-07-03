@@ -40,3 +40,4 @@ build/Release
 .tmp
 mock
 dist
+build
