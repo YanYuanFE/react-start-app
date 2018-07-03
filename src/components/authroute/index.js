@@ -4,8 +4,8 @@ import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import { loadData, recordPath } from '../../redux/actions/user';
 import { connect } from 'react-redux';
-import API from 'constants/api';
-import { SUCCESS, ERR_OK } from 'constants/config';
+import API from '../../constants/api';
+import { SUCCESS, ERR_OK } from '../../constants/config';
 
 @withRouter
 @connect(

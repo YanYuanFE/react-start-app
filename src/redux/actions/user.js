@@ -1,6 +1,6 @@
 import axios from 'axios';
-import API from 'constants/api';
-import { SUCCESS, ERR_OK } from 'constants/config';
+import API from '../../constants/api';
+import { SUCCESS, ERR_OK } from '../../constants/config';
 import * as actionTypes from '../actionTypes';
 
 export function errorMsg(msg) {
