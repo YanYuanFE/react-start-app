@@ -1,10 +1,20 @@
 const webpack = require('webpack');
+const path = require('path');
 const merge = require('webpack-merge');
-const common = require('./webpack.config.base');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const common = require('./webpack.config.base');
+
+const getThemeConfig = require('../theme.js');
+
+const theme = getThemeConfig();
+
+function resolve(dir) {
+  return path.join(__dirname, '..', dir);
+}
 
 module.exports = merge(common, {
   mode: 'production',
@@ -23,10 +33,90 @@ module.exports = merge(common, {
       }
     }
   },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              // modules: true,
+              // localIdentName: '[local]--[hash:base64:5]',
+            },
+          },
+        ],
+      },
+      {
+        test: /.less$/,  // antd 中的less
+        exclude: [/src/],
+        // include: path.resolve(__dirname, 'node_modules/antd'),
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            },
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              strictMath: false,
+              noIeCompat: true,
+              javascriptEnabled: true,
+              modifyVars: theme,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.less$/,
+        exclude: resolve('node_modules'),
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[local]--[hash:base64:5]',
+            },
+          },
+          {
+            loader: 'postcss-loader',
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              strictMath: false,
+              noIeCompat: true,
+              javascriptEnabled: true,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.s[ac]ss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'sass-loader',
+        ],
+      },
+    ]
+  },
   plugins: [
-    new CleanWebpackPlugin(['dist']),
+    new CleanWebpackPlugin([resolve('dist')]),
     new HtmlWebpackPlugin({
-      template: 'src/index.html',
+      template: resolve('index.html'),
       filename: 'index.html',
       favicon: 'favicon.ico',
       chunks: ['app'],

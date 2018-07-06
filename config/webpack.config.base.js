@@ -45,14 +45,38 @@ module.exports = {
         test: /\.css$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader,
+            loader: 'style-loader',
           },
           {
             loader: 'css-loader',
             options: {
-              sourceMap: true,
               // modules: true,
               // localIdentName: '[local]--[hash:base64:5]',
+            },
+          },
+        ],
+      },
+      {
+        test: /.less$/,  // antd 中的less
+        exclude: [/src/],
+        // include: path.resolve(__dirname, 'node_modules/antd'),
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+            },
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              strictMath: false,
+              noIeCompat: true,
+              javascriptEnabled: true,
+              modifyVars: theme,
             },
           },
         ],
@@ -62,12 +86,11 @@ module.exports = {
         exclude: resolve('node_modules'),
         use: [
           {
-            loader: MiniCssExtractPlugin.loader,
+            loader: 'style-loader',
           },
           {
             loader: 'css-loader',
             options: {
-              sourceMap: true,
               modules: true,
               localIdentName: '[local]--[hash:base64:5]',
             },
@@ -86,30 +109,9 @@ module.exports = {
         ],
       },
       {
-        test: /.less$/,  // antd 中的less
-        include: path.resolve(__dirname, 'node_modules/antd'),
-        use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-          },
-          {
-            loader: 'less-loader',
-            options: {
-              sourceMap: true,
-              modules: false,
-              javascriptEnabled: true,
-              modifyVars: theme,
-            },
-          },
-        ],
-      },
-      {
         test: /\.s[ac]ss$/,
         use: [
-          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'style-loader',
           'css-loader',
           'postcss-loader',
           'sass-loader',
@@ -131,7 +133,7 @@ module.exports = {
           {
             loader: 'url-loader',
             options: {
-              limit: 1000
+              limit: 1000,
             },
           },
         ],

@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import moment from 'moment';
-import { connect } from 'dva';
 import { Link } from 'dva/router';
 import { Row, Col, Card, List, Avatar } from 'antd';
 
@@ -69,33 +68,7 @@ const members = [
   },
 ];
 
-@connect(({ project, activities, chart, loading }) => ({
-  project,
-  activities,
-  chart,
-  projectLoading: loading.effects['project/fetchNotice'],
-  activitiesLoading: loading.effects['activities/fetchList'],
-}))
 export default class Workplace extends PureComponent {
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'project/fetchNotice',
-    });
-    dispatch({
-      type: 'activities/fetchList',
-    });
-    dispatch({
-      type: 'chart/fetch',
-    });
-  }
-
-  componentWillUnmount() {
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'chart/clear',
-    });
-  }
 
   renderActivities() {
     const { activities: { list } } = this.props;
@@ -133,12 +106,6 @@ export default class Workplace extends PureComponent {
   }
 
   render() {
-    const {
-      project: { notice },
-      projectLoading,
-      activitiesLoading,
-      chart: { radarData },
-    } = this.props;
 
     const pageHeaderContent = (
       <div className={styles.pageHeaderContent}>
@@ -231,16 +198,6 @@ export default class Workplace extends PureComponent {
               bodyStyle={{ padding: 0 }}
             >
               <EditableLinkGroup onAdd={() => {}} links={links} linkElement={Link} />
-            </Card>
-            <Card
-              style={{ marginBottom: 24 }}
-              bordered={false}
-              title="XX 指数"
-              loading={radarData.length === 0}
-            >
-              <div className={styles.chart}>
-                <Radar hasLegend height={343} data={radarData} />
-              </div>
             </Card>
             <Card bodyStyle={{ paddingTop: 12, paddingBottom: 12 }} bordered={false} title="团队">
               <div className={styles.members}>

@@ -20,8 +20,8 @@
     "react-dom": "^16.4.1"
   },
   "scripts": {
-    "start": "webpack-dev-server --open --mode development --config ./config/webpack.config.dev.js",
-    "build": "webpack --mode production --config ./config/webpack.config.prod.js",
+    "start": "webpack-dev-server --open --inline --progress --config ./config/webpack.config.dev.js",
+    "build": "webpack --config ./config/webpack.config.prod.js",
     "test": "node scripts/test.js --env=jsdom"
   },
   "devDependencies": {
@@ -29,11 +29,12 @@
     "@babel/plugin-proposal-class-properties": "^7.0.0-beta.51",
     "@babel/plugin-proposal-decorators": "^7.0.0-beta.51",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0-beta.51",
+    "@babel/plugin-transform-runtime": "^7.0.0-beta.52",
     "@babel/preset-env": "^7.0.0-beta.51",
     "@babel/preset-react": "^7.0.0-beta.51",
     "autoprefixer": "^8.6.4",
     "babel-eslint": "^8.2.5",
-    "babel-loader": "^8.0.0-beta.4",
+    "babel-loader": "^8.0.0-beta.2",
     "babel-plugin-dva-hmr": "^0.4.1",
     "babel-plugin-import": "^1.8.0",
     "clean-webpack-plugin": "^0.1.19",

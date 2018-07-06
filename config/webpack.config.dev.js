@@ -1,5 +1,4 @@
 const merge = require('webpack-merge');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const common = require('./webpack.config.base');
@@ -24,10 +23,6 @@ module.exports = merge(common, {
     ],
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: "[name].[contenthash].css",
-      chunkFilename: "[id].[contenthash].css",
-    }),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({

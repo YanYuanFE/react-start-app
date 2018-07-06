@@ -1,14 +1,16 @@
 {
   "presets":["@babel/react", "@babel/env"],
   "plugins": [
-//    "dva-hmr",
+    "dva-hmr",
     ["@babel/plugin-proposal-decorators", { "legacy": true }],
     "@babel/plugin-syntax-dynamic-import",
     "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-transform-runtime",
     [
       "import", {
         "libraryName": "antd",
-        "style": "true"
+//        "libraryDirectory": "es",
+        "style": true
       }
     ]
   ]

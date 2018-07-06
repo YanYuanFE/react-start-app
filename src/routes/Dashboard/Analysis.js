@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import { connect } from 'dva';
 import {
   Row,
   Col,
@@ -28,21 +27,11 @@ for (let i = 0; i < 7; i += 1) {
   });
 }
 
-@connect(({ loading }) => ({
-  loading: loading.effects['chart/fetch'],
-}))
 export default class Analysis extends Component {
   state = {
     salesType: 'all',
     rangePickerValue: getTimeDistance('year'),
   };
-
-  componentWillUnmount() {
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'chart/clear',
-    });
-  }
 
   handleChangeSalesType = e => {
     this.setState({
@@ -78,7 +67,6 @@ export default class Analysis extends Component {
 
   render() {
     const { rangePickerValue, salesType } = this.state;
-    const { loading } = this.props;
 
     const menu = (
       <Menu>
@@ -125,7 +113,7 @@ export default class Analysis extends Component {
 
     return (
       <Fragment>
-        <Card loading={loading} bordered={false} bodyStyle={{ padding: 0 }}>
+        <Card bordered={false} bodyStyle={{ padding: 0 }}>
           <div className={styles.salesCard}>
             <Tabs tabBarExtraContent={salesExtra} size="large" tabBarStyle={{ marginBottom: 24 }}>
               <TabPane tab="销售额" key="sales">
@@ -190,7 +178,6 @@ export default class Analysis extends Component {
         <Row gutter={24}>
           <Col xl={12} lg={24} md={24} sm={24} xs={24}>
             <Card
-              loading={loading}
               bordered={false}
               title="线上热门搜索"
               extra={iconGroup}
@@ -229,7 +216,6 @@ export default class Analysis extends Component {
           </Col>
           <Col xl={12} lg={24} md={24} sm={24} xs={24}>
             <Card
-              loading={loading}
               className={styles.salesCard}
               bordered={false}
               title="销售额类别占比"
