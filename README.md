@@ -43,7 +43,7 @@ react-start-app/
     style/
     utils/
     App.css
-    App.js
+    router.js
     App.test.js
     index.css
     index.js
