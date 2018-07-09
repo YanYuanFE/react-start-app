@@ -13,9 +13,6 @@ module.exports = () => {
     // Button
     '@button-primary-bg': primaryColor,
     // Button lg
-    '@btn-height-lg': '48px',
-    '@btn-padding-lg': '11px',
-    '@btn-font-size-lg': '20px',
 
     // Table
     '@table-header-bg': '#fff',

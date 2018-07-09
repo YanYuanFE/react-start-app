@@ -1,6 +1,6 @@
 ## react-start-app
 
-### 基于Ant-design的React脚手架，开箱即用
+### 基于Ant Design的React脚手架，开箱即用
 
 > A React start project
 
