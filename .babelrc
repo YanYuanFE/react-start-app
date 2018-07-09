@@ -1,4 +1,17 @@
 {
-  "presets":["react","env", "latest", "stage-0"],
-  "plugins": ["transform-object-rest-spread", "transform-decorators-legacy"]
+  "presets":["@babel/react", "@babel/env"],
+  "plugins": [
+    "dva-hmr",
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-transform-runtime",
+    [
+      "import", {
+        "libraryName": "antd",
+//        "libraryDirectory": "es",
+        "style": true
+      }
+    ]
+  ]
 }
