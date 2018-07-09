@@ -21,7 +21,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --open --inline --progress --config ./config/webpack.config.dev.js",
-    "build": "webpack --config ./config/webpack.config.prod.js",
+    "build": "webpack --progress --config ./config/webpack.config.prod.js",
     "test": "node scripts/test.js --env=jsdom"
   },
   "devDependencies": {

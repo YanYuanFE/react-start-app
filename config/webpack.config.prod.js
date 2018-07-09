@@ -21,33 +21,38 @@ module.exports = merge(common, {
   devtool: 'source-map',
   optimization: {
     runtimeChunk: {
-      name: 'manifest'
+      name: 'manifest',
     },
     splitChunks: {
       cacheGroups: {
         commons: {
           test: /[\\/]node_modules[\\/]/,
           name: 'vendor',
-          chunks: 'all'
+          chunks: 'all',
+        },
+        styles: {
+          name: 'styles',
+          test: /\.css$/,
+          chunks: 'all',
+          enforce: true
         }
-      }
-    }
+      },
+    },
   },
   module: {
     rules: [
       {
         test: /\.css$/,
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-          },
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
-              // modules: true,
-              // localIdentName: '[local]--[hash:base64:5]',
+              importLoaders: 1,
+              sourceMap: true,
             },
           },
+          'postcss-loader'
         ],
       },
       {
@@ -61,9 +66,11 @@ module.exports = merge(common, {
           {
             loader: 'css-loader',
             options: {
-              importLoaders: 1,
+              importLoaders: 2,
+              sourceMap: true,
             },
           },
+          'postcss-loader',
           {
             loader: 'less-loader',
             options: {
@@ -87,6 +94,8 @@ module.exports = merge(common, {
             options: {
               modules: true,
               localIdentName: '[local]--[hash:base64:5]',
+              importLoaders: 2,
+              sourceMap: true,
             },
           },
           {
@@ -111,7 +120,7 @@ module.exports = merge(common, {
           'sass-loader',
         ],
       },
-    ]
+    ],
   },
   plugins: [
     new CleanWebpackPlugin([resolve('dist')]),
@@ -124,21 +133,21 @@ module.exports = merge(common, {
         return chunk1.id - chunk2.id;
       },
       minify: {
-        collapseWhitespace: true
-      }
+        collapseWhitespace: true,
+      },
     }),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
+      'process.env.NODE_ENV': JSON.stringify('production'),
     }),
     new MiniCssExtractPlugin({
       filename: '[name].[hash].css',
-      chunkFilename: '[id].[hash].css'
+      chunkFilename: '[id].[hash].css',
     }),
     new webpack.HashedModuleIdsPlugin(),
     new UglifyJsPlugin({
       test: /\.js($|\?)/i,
       exclude: /\/node_modules/,
-      sourceMap: true
-    })
-  ]
+      sourceMap: true,
+    }),
+  ],
 });
