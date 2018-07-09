@@ -34,8 +34,8 @@ module.exports = merge(common, {
           name: 'styles',
           test: /\.css$/,
           chunks: 'all',
-          enforce: true
-        }
+          enforce: true,
+        },
       },
     },
   },
@@ -52,7 +52,7 @@ module.exports = merge(common, {
               sourceMap: true,
             },
           },
-          'postcss-loader'
+          'postcss-loader',
         ],
       },
       {
@@ -86,9 +86,7 @@ module.exports = merge(common, {
         test: /\.less$/,
         exclude: resolve('node_modules'),
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-          },
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -98,9 +96,7 @@ module.exports = merge(common, {
               sourceMap: true,
             },
           },
-          {
-            loader: 'postcss-loader',
-          },
+          'postcss-loader',
           {
             loader: 'less-loader',
             options: {
@@ -123,12 +119,15 @@ module.exports = merge(common, {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin('../dist'),
+    new CleanWebpackPlugin(path.resolve(__dirname, '../dist'), {
+      root: path.resolve(__dirname, '../'),    // 设置root
+      verbose: true,
+    }),
     new HtmlWebpackPlugin({
       template: resolve('index.html'),
       filename: 'index.html',
       favicon: 'favicon.ico',
-      chunks: ['app'],
+      chunks: ['app', 'vendor', 'manifest'],
       chunksSortMode: function(chunk1, chunk2) {
         return chunk1.id - chunk2.id;
       },

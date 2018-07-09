@@ -1,78 +1,81 @@
 ## react-start-app
 
-### 基于create-react-app的脚手架，使用npm run eject进行定制
+### 基于Ant-design的React脚手架，开箱即用
 
 > A React start project
-
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 
 ## 技术栈
 
-- react
-- redux
-- react-router v4
-- webpack 3.x
-- scss
-- autoprefixer
-- axios
+*  react
+*  Ant Design and Ant Pro
+*  dva
+*  webpack 4.x
+
+## 特性
+*  基于React，Ant Design，dva等企业级后台管理系统最佳实践。
+*  基于Ant Design 和Ant Pro UI组件库，提供后台管理系统常见使用场景。
+*  基于CSS Module的样式解决方案。
+*  基于dva动态加载 Model 和路由，按需加载。
+*  基于webpack4.x本地调试和构建。
+*  响应式设计。
 
 
-## Folder Structure
+## 开发构建
 
-After creation, your project should look like this:
+### 目录结构
 
+```bash
+├── /dist/           # 项目输出目录
+├── /src/            # 项目源码目录
+│ ├── /assets/       # 图片资源
+│ ├── /common/       # 公共文件，编译时copy至dist目录
+│ │ ├── munu.js      # 侧边栏菜单配置
+│ │ └── router.js    # 路由配置
+│ ├── /components/   # UI组件
+│ ├── /layouts/      # 布局组件
+│ ├── /routes/       # 页面组件
+│ ├── /models/       # 数据模型
+│ ├── /services/     # 数据接口
+│ ├── /utils/        # 工具函数
+│ │ ├── authority.js # 权限工具函数
+│ │ ├── Authorized.js# 权限配置
+│ │ ├── utils.js     # 工具函数
+│ │ ├── request.js   # 异步请求函数
+│ │ └── utils.less   # 工具样式
+│ ├── route.js       # 路由入口
+│ ├── index.js       # 入口文件
+│ ├── themes.js      # 自定义主题样式
+│ └── index.html
+├── postcss.config.js# postcss配置
+├── package.json     # 项目依赖
+├── .eslintrc        # ESlint配置
+└── .babelrc         # babel配置
 ```
-react-start-app/
-  config/
-  dist/
-  README.md
-  node_modules/
-  package.json
-  scripts/
-  public/
-    index.html
-    favicon.ico
-  src/
-    assets/
-    common/
-    components/
-    containers/
-    constants/
-    redux/
-    style/
-    utils/
-    App.css
-    router.js
-    App.test.js
-    index.css
-    index.js
-    logo.svg
+
+### 快速开始
+
+克隆项目文件:
+
+```bash
+git clone https://github.com/YanYuanFE/react-start-app
 ```
 
-## Available Scripts
+进入目录安装依赖:
 
-In the project directory, you can run:
+```bash
+#国内用户推荐yarn或者cnpm
+npm i 或者 yarn install
+```
 
-### `npm start`
+开发：
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```bash
+npm start
+```
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+构建：
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](#running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](#deployment) for more information.
+```bash
+npm run build
+```

@@ -1,6 +1,7 @@
 {
-  "name": "react-webpack",
-  "version": "0.1.0",
+  "name": "react-start-app",
+  "version": "1.0.0",
+  "description": "An scaffold for React applications",
   "private": true,
   "dependencies": {
     "@babel/polyfill": "^7.0.0-beta.51",
@@ -12,6 +13,8 @@
     "lodash": "^4.17.10",
     "lodash-decorators": "^6.0.0",
     "moment": "^2.22.2",
+    "omit.js": "^1.0.0",
+    "path-to-regexp": "^2.2.1",
     "prop-types": "^15.6.2",
     "rc-drawer": "^1.5.3",
     "react": "^16.4.1",

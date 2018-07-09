@@ -3,8 +3,8 @@ import { routerRedux, Route, Switch } from 'dva/router';
 import { LocaleProvider, Spin } from 'antd';
 import zhCN from 'antd/lib/locale-provider/zh_CN';
 import dynamic from 'dva/dynamic';
-import { getRouterData } from './common/router';
-import Authorized from './utils/Authorized';
+import { getRouterData } from 'common/router';
+import Authorized from 'utils/Authorized';
 import styles from './index.less';
 
 const { ConnectedRouter } = routerRedux;

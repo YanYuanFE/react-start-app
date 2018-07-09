@@ -1,9 +1,4 @@
 const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const getThemeConfig = require('../theme.js');
-
-const theme = getThemeConfig();
-const devMode = process.env.NODE_ENV !== 'production';
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir);
@@ -23,16 +18,16 @@ module.exports = {
     extensions: ['.js', '.jsx', '.json'],
     modules: [
       'node_modules',
-      resolve('app'),
+      resolve('src'),
       resolve('node_modules'),
     ],
     alias: {
       app: resolve('src'),
+      assets: resolve('assets'),
       models: resolve('src/models'),
       utils: resolve('src/utils'),
       layouts: resolve('src/layouts'),
-      pages: resolve('src/pages'),
-      constants: resolve('src/constants'),
+      services: resolve('src/services'),
       components: resolve('src/components'),
     },
   },
@@ -41,73 +36,6 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.css$/,
-        use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              // modules: true,
-              // localIdentName: '[local]--[hash:base64:5]',
-            },
-          },
-        ],
-      },
-      {
-        test: /.less$/,  // antd 中的less
-        exclude: [/src/],
-        // include: path.resolve(__dirname, 'node_modules/antd'),
-        use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-            },
-          },
-          {
-            loader: 'less-loader',
-            options: {
-              strictMath: false,
-              noIeCompat: true,
-              javascriptEnabled: true,
-              modifyVars: theme,
-            },
-          },
-        ],
-      },
-      {
-        test: /\.less$/,
-        exclude: resolve('node_modules'),
-        use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              localIdentName: '[local]--[hash:base64:5]',
-            },
-          },
-          {
-            loader: 'postcss-loader',
-          },
-          {
-            loader: 'less-loader',
-            options: {
-              strictMath: false,
-              noIeCompat: true,
-              javascriptEnabled: true,
-            },
-          },
-        ],
-      },
       {
         test: /\.s[ac]ss$/,
         use: [
@@ -120,6 +48,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /(node_modules|bower_components)/,
+        include: resolve('src'),
         use: {
           loader: 'babel-loader',
           options: {
