@@ -1,10 +1,13 @@
+const path = require('path');
 const merge = require('webpack-merge');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const common = require('./webpack.config.base');
 
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-//   .BundleAnalyzerPlugin;
+function resolve(dir) {
+  return path.join(__dirname, '..', dir);
+}
+
 module.exports = merge(common, {
   mode: 'development',
   devtool: 'inline-source-map',
@@ -26,7 +29,7 @@ module.exports = merge(common, {
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      template: 'index.html',
+      template: resolve('index.html'),
       filename: 'index.html',
       // favicon: 'favicon.ico'
     }),

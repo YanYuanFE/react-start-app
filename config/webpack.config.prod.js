@@ -123,7 +123,7 @@ module.exports = merge(common, {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin([resolve('dist')]),
+    new CleanWebpackPlugin('../dist'),
     new HtmlWebpackPlugin({
       template: resolve('index.html'),
       filename: 'index.html',
