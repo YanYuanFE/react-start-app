@@ -2,8 +2,11 @@ const path = require('path');
 const merge = require('webpack-merge');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const Dashboard = require('webpack-dashboard');
+// var DashboardPlugin = require('webpack-dashboard/plugin');
 const common = require('./webpack.config.base');
 const getThemeConfig = require('../theme.js');
+// const dashboard = new Dashboard();
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir);
@@ -13,19 +16,18 @@ const theme = getThemeConfig();
 
 module.exports = merge(common, {
   mode: 'development',
-  devtool: 'inline-source-map',
+  devtool: 'cheap-module-eval-source-map',
+  performance: {
+    hints: false,
+  },
   devServer: {
-    contentBase: './dist',
+    contentBase: path.resolve(__dirname, '../dist'),
     hot: true,
     overlay: true,
+    // quiet: true,
   },
   module: {
     rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'eslint-loader',
-      },
       {
         test: /\.css$/,
         use: [
@@ -43,7 +45,7 @@ module.exports = merge(common, {
       },
       {
         test: /.less$/,  // antd 中的less
-        exclude: [/src/],
+        exclude: /src/,
         // include: path.resolve(__dirname, 'node_modules/antd'),
         use: [
           {
@@ -52,8 +54,11 @@ module.exports = merge(common, {
           {
             loader: 'css-loader',
             options: {
-              importLoaders: 1,
+              importLoaders: 2,
             },
+          },
+          {
+            loader: 'postcss-loader',
           },
           {
             loader: 'less-loader',
@@ -68,7 +73,8 @@ module.exports = merge(common, {
       },
       {
         test: /\.less$/,
-        exclude: resolve('node_modules'),
+        // exclude: path.resolve(__dirname, 'node_modules'),
+        include: /src/,
         use: [
           {
             loader: 'style-loader',
@@ -78,6 +84,7 @@ module.exports = merge(common, {
             options: {
               modules: true,
               localIdentName: '[local]--[hash:base64:5]',
+              importLoaders: 2,
             },
           },
           {
@@ -96,6 +103,7 @@ module.exports = merge(common, {
     ],
   },
   plugins: [
+    // new DashboardPlugin(dashboard.setData),
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({

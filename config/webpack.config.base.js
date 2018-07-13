@@ -5,34 +5,32 @@ function resolve(dir) {
 }
 
 module.exports = {
+  context: path.resolve(__dirname, '../'),
   entry: {
     app: './src/index.js',
     vendor: ['react', 'react-dom'],
   },
   output: {
     filename: '[name].[hash].js',
-    path: resolve('dist'),
+    path: path.resolve(__dirname, '../dist'),
     chunkFilename: '[name].bundle.js',
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
     modules: [
       'node_modules',
-      resolve('src'),
-      resolve('node_modules'),
+      path.resolve(__dirname, 'src'),
     ],
     alias: {
-      app: resolve('src'),
+      src: resolve('src'),
       assets: resolve('assets'),
       models: resolve('src/models'),
       utils: resolve('src/utils'),
       layouts: resolve('src/layouts'),
       services: resolve('src/services'),
       components: resolve('src/components'),
+      common: resolve('src/common'),
     },
-  },
-  performance: {
-    hints: process.env.NODE_ENV === 'production' ? 'warning' : false,
   },
   module: {
     rules: [
@@ -47,14 +45,19 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
-        include: resolve('src'),
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
-            cacheDirectory: true,
+            cacheDirectory: false,
           },
         },
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        enforce: 'pre',
+        loader: 'eslint-loader',
       },
       {
         test: /\.(woff|woff2|eot|ttf)$/,
@@ -74,11 +77,6 @@ module.exports = {
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/,
         loader: 'file-loader?name=i/[name].[ext]',
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'eslint-loader',
       },
     ],
   },

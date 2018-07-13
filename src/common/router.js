@@ -1,6 +1,7 @@
-import { createElement } from 'react';
-import dynamic from 'dva/dynamic';
+import React, { createElement } from 'react';
+import { Spin } from 'antd';
 import pathToRegexp from 'path-to-regexp';
+import Loadable from 'react-loadable';
 import { getMenuData } from './menu';
 
 let routerDataCache;
@@ -13,15 +14,17 @@ const modelNotExisted = (app, model) =>
 
 // wrapper of dynamic
 const dynamicWrapper = (app, models, component) => {
+  // register models
+  models.forEach(model => {
+    if (modelNotExisted(app, model)) {
+      // eslint-disable-next-line
+      app.model(require(`../models/${model}`).default);
+    }
+  });
+
   // () => require('module')
   // transformed by babel-plugin-dynamic-import-node-sync
   if (component.toString().indexOf('.then(') < 0) {
-    models.forEach(model => {
-      if (modelNotExisted(app, model)) {
-        // eslint-disable-next-line
-        app.model(require(`../models/${model}`).default);
-      }
-    });
     return props => {
       if (!routerDataCache) {
         routerDataCache = getRouterData(app);
@@ -33,12 +36,8 @@ const dynamicWrapper = (app, models, component) => {
     };
   }
   // () => import('module')
-  return dynamic({
-    app,
-    models: () =>
-      models.filter(model => modelNotExisted(app, model)).map(m => import(`../models/${m}.js`)),
-    // add routerData prop
-    component: () => {
+  return Loadable({
+    loader: () => {
       if (!routerDataCache) {
         routerDataCache = getRouterData(app);
       }
@@ -50,6 +49,9 @@ const dynamicWrapper = (app, models, component) => {
             routerData: routerDataCache,
           });
       });
+    },
+    loading: () => {
+      return <Spin size="large" className="global-spin" />;
     },
   });
 };
@@ -72,26 +74,11 @@ export const getRouterData = app => {
     '/': {
       component: dynamicWrapper(app, ['user', 'login'], () => import('../layouts/BasicLayout')),
     },
-    '/user': {
-      component: dynamicWrapper(app, [], () => import('../layouts/UserLayout')),
-    },
-    '/user/login': {
-      component: dynamicWrapper(app, ['login'], () => import('../routes/User/Login')),
-    },
-    '/user/register': {
-      component: dynamicWrapper(app, ['register'], () => import('../routes/User/Register')),
-    },
-    '/user/register-result': {
-      component: dynamicWrapper(app, [], () => import('../routes/User/RegisterResult')),
-    },
-    // '/user/:id': {
-    //   component: dynamicWrapper(app, [], () => import('../routes/User/SomeComponent')),
-    // },
     '/dashboard/analysis': {
-      component: dynamicWrapper(app, [], () => import('../routes/Dashboard/Analysis')),
+      component: dynamicWrapper(app, ['chart'], () => import('../routes/Dashboard/Analysis')),
     },
     '/dashboard/monitor': {
-      component: dynamicWrapper(app, [], () => import('../routes/Dashboard/Monitor')),
+      component: dynamicWrapper(app, ['monitor'], () => import('../routes/Dashboard/Monitor')),
     },
     // '/dashboard/workplace': {
     //   component: dynamicWrapper(app, ['project', 'activities', 'chart'], () =>
@@ -157,19 +144,34 @@ export const getRouterData = app => {
     // '/result/fail': {
     //   component: dynamicWrapper(app, [], () => import('../routes/Result/Error')),
     // },
-    // '/exception/403': {
-    //   component: dynamicWrapper(app, [], () => import('../routes/Exception/403')),
-    // },
-    // '/exception/404': {
-    //   component: dynamicWrapper(app, [], () => import('../routes/Exception/404')),
-    // },
-    // '/exception/500': {
-    //   component: dynamicWrapper(app, [], () => import('../routes/Exception/500')),
-    // },
+    '/exception/403': {
+      component: dynamicWrapper(app, [], () => import('../routes/Exception/403')),
+    },
+    '/exception/404': {
+      component: dynamicWrapper(app, [], () => import('../routes/Exception/404')),
+    },
+    '/exception/500': {
+      component: dynamicWrapper(app, [], () => import('../routes/Exception/500')),
+    },
     // '/exception/trigger': {
     //   component: dynamicWrapper(app, ['error'], () =>
     //     import('../routes/Exception/triggerException')
     //   ),
+    // },
+    '/user': {
+      component: dynamicWrapper(app, [], () => import('../layouts/UserLayout')),
+    },
+    '/user/login': {
+      component: dynamicWrapper(app, ['login'], () => import('../routes/User/Login')),
+    },
+    '/user/register': {
+      component: dynamicWrapper(app, ['register'], () => import('../routes/User/Register')),
+    },
+    '/user/register-result': {
+      component: dynamicWrapper(app, [], () => import('../routes/User/RegisterResult')),
+    },
+    // '/user/:id': {
+    //   component: dynamicWrapper(app, [], () => import('../routes/User/SomeComponent')),
     // },
   };
   // Get name from ./menu.js or just set it in the router data.
