@@ -7,12 +7,9 @@ import {
   Tabs,
   Radio,
   DatePicker,
-  Tooltip,
   Menu,
   Dropdown,
 } from 'antd';
-import NumberInfo from 'components/NumberInfo';
-import { getTimeDistance } from '../../utils/utils';
 
 import styles from './Analysis.less';
 
@@ -30,7 +27,6 @@ for (let i = 0; i < 7; i += 1) {
 export default class Analysis extends Component {
   state = {
     salesType: 'all',
-    rangePickerValue: getTimeDistance('year'),
   };
 
   handleChangeSalesType = e => {
@@ -44,26 +40,6 @@ export default class Analysis extends Component {
       rangePickerValue,
     });
   };
-
-  selectDate = type => {
-    this.setState({
-      rangePickerValue: getTimeDistance(type),
-    });
-  };
-
-  isActive(type) {
-    const { rangePickerValue } = this.state;
-    const value = getTimeDistance(type);
-    if (!rangePickerValue[0] || !rangePickerValue[1]) {
-      return;
-    }
-    if (
-      rangePickerValue[0].isSame(value[0], 'day') &&
-      rangePickerValue[1].isSame(value[1], 'day')
-    ) {
-      return styles.currentDate;
-    }
-  }
 
   render() {
     const { rangePickerValue, salesType } = this.state;
@@ -89,20 +65,6 @@ export default class Analysis extends Component {
 
     const salesExtra = (
       <div className={styles.salesExtraWrap}>
-        <div className={styles.salesExtra}>
-          <a className={this.isActive('today')} onClick={() => this.selectDate('today')}>
-            今日
-          </a>
-          <a className={this.isActive('week')} onClick={() => this.selectDate('week')}>
-            本周
-          </a>
-          <a className={this.isActive('month')} onClick={() => this.selectDate('month')}>
-            本月
-          </a>
-          <a className={this.isActive('year')} onClick={() => this.selectDate('year')}>
-            全年
-          </a>
-        </div>
         <RangePicker
           value={rangePickerValue}
           onChange={this.handleRangePickerChange}
@@ -154,19 +116,6 @@ export default class Analysis extends Component {
                       <h4 className={styles.rankingTitle}>
                         门店访问量排名
                       </h4>
-                      <ul className={styles.rankingList}>
-                        {rankingListData.map((item, i) => (
-                          <li key={item.title}>
-                            <span className={i < 3 ? styles.active : ''}>{i + 1}</span>
-                            <span>
-                              {item.title}
-                            </span>
-                            <span>
-                              {item.total}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
                     </div>
                   </Col>
                 </Row>
@@ -183,35 +132,7 @@ export default class Analysis extends Component {
               extra={iconGroup}
               style={{ marginTop: 24 }}
             >
-              <Row gutter={68}>
-                <Col sm={12} xs={24} style={{ marginBottom: 24 }}>
-                  <NumberInfo
-                    subTitle={
-                      <span>
-                        搜索用户数
-                        <Tooltip title="指标文案">
-                          <Icon style={{ marginLeft: 8 }} type="info-circle-o" />
-                        </Tooltip>
-                      </span>
-                    }
-                    gap={8}
-                    total={12321}
-                    status="up"
-                    subTotal={17.1}
-                  />
-                  111
-                </Col>
-                <Col sm={12} xs={24} style={{ marginBottom: 24 }}>
-                  <NumberInfo
-                    subTitle="人均搜索次数"
-                    total={2.7}
-                    status="down"
-                    subTotal={26.2}
-                    gap={8}
-                  />
-                  111
-                </Col>
-              </Row>
+              111
             </Card>
           </Col>
           <Col xl={12} lg={24} md={24} sm={24} xs={24}>

@@ -75,10 +75,10 @@ export const getRouterData = app => {
       component: dynamicWrapper(app, ['user', 'login'], () => import('../layouts/BasicLayout')),
     },
     '/dashboard/analysis': {
-      component: dynamicWrapper(app, ['chart'], () => import('../routes/Dashboard/Analysis')),
+      component: dynamicWrapper(app, [], () => import('../routes/Dashboard/Analysis')),
     },
     '/dashboard/monitor': {
-      component: dynamicWrapper(app, ['monitor'], () => import('../routes/Dashboard/Monitor')),
+      component: dynamicWrapper(app, [], () => import('../routes/Dashboard/Monitor')),
     },
     // '/dashboard/workplace': {
     //   component: dynamicWrapper(app, ['project', 'activities', 'chart'], () =>
@@ -161,15 +161,15 @@ export const getRouterData = app => {
     '/user': {
       component: dynamicWrapper(app, [], () => import('../layouts/UserLayout')),
     },
-    '/user/login': {
-      component: dynamicWrapper(app, ['login'], () => import('../routes/User/Login')),
-    },
-    '/user/register': {
-      component: dynamicWrapper(app, ['register'], () => import('../routes/User/Register')),
-    },
-    '/user/register-result': {
-      component: dynamicWrapper(app, [], () => import('../routes/User/RegisterResult')),
-    },
+    // '/user/login': {
+    //   component: dynamicWrapper(app, ['login'], () => import('../routes/User/Login')),
+    // },
+    // '/user/register': {
+    //   component: dynamicWrapper(app, ['register'], () => import('../routes/User/Register')),
+    // },
+    // '/user/register-result': {
+    //   component: dynamicWrapper(app, [], () => import('../routes/User/RegisterResult')),
+    // },
     // '/user/:id': {
     //   component: dynamicWrapper(app, [], () => import('../routes/User/SomeComponent')),
     // },

@@ -31,11 +31,11 @@ export default class PromiseRender extends React.PureComponent {
         });
       });
   }
+
   // Determine whether the incoming component has been instantiated
   // AuthorizedRoute is already instantiated
   // Authorized  render is already instantiated, children is no instantiated
   // Secured is not instantiated
-
   checkIsInstantiation = target => {
     if (!React.isValidElement(target)) {
       return target;
@@ -44,8 +44,7 @@ export default class PromiseRender extends React.PureComponent {
   };
 
   render() {
-    const { component } = this.state;
-    const Component = component;
+    const { component: Component } = this.state;
     return Component ? (
       <Component {...this.props} />
     ) : (

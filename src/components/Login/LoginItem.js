@@ -23,8 +23,8 @@ function generator({ defaultProps, defaultRules, type }) {
       }
 
       componentDidMount() {
-        const {name} = this.props;
-        const {updateActive} = this.context;
+        const { updateActive } = this.context;
+        const { name } = this.props;
         if (updateActive) {
           updateActive(name);
         }
@@ -35,9 +35,9 @@ function generator({ defaultProps, defaultRules, type }) {
       }
 
       onGetCaptcha = () => {
-        const {onGetCaptcha} = this.props;
         let count = 59;
         this.setState({ count });
+        const { onGetCaptcha } = this.props;
         if (onGetCaptcha) {
           onGetCaptcha();
         }
@@ -51,7 +51,7 @@ function generator({ defaultProps, defaultRules, type }) {
       };
 
       render() {
-        const {form} = this.context;
+        const { form } = this.context;
         const { getFieldDecorator } = form;
         const options = {};
         let otherProps = {};

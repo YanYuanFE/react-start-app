@@ -28,14 +28,13 @@ const getIcon = icon => {
  * @param  menu
  */
 export const getFlatMenuKeys = menu =>
-  menu
-    .reduce((keys, item) => {
-      keys.push(item.path);
-      if (item.children) {
-        return keys.concat(getFlatMenuKeys(item.children));
-      }
-      return keys;
-    }, []);
+  menu.reduce((keys, item) => {
+    keys.push(item.path);
+    if (item.children) {
+      return keys.concat(getFlatMenuKeys(item.children));
+    }
+    return keys;
+  }, []);
 
 /**
  * Find all matched menu keys based on paths
@@ -43,11 +42,11 @@ export const getFlatMenuKeys = menu =>
  * @param  paths: [/abc, /abc/11, /abc/11/info]
  */
 export const getMenuMatchKeys = (flatMenuKeys, paths) =>
-  paths
-    .reduce((matchKeys, path) => (
-      matchKeys.concat(
-        flatMenuKeys.filter(item => pathToRegexp(item).test(path))
-    )), []);
+  paths.reduce(
+    (matchKeys, path) =>
+      matchKeys.concat(flatMenuKeys.filter(item => pathToRegexp(item).test(path))),
+    []
+  );
 
 export default class SiderMenu extends PureComponent {
   constructor(props) {
@@ -67,24 +66,26 @@ export default class SiderMenu extends PureComponent {
       });
     }
   }
+
   /**
    * Convert pathname to openKeys
    * /list/search/articles = > ['list','/list/search']
    * @param  props
    */
-
   getDefaultCollapsedSubMenus(props) {
-    const { location: { pathname } } = props || this.props;
+    const {
+      location: { pathname },
+    } =
+      props || this.props;
     return getMenuMatchKeys(this.flatMenuKeys, urlToList(pathname));
   }
+
   /**
    * 判断是否是http链接.返回 Link 或 a
    * Judge whether it is http link.return a or Link
    * @memberof SiderMenu
    */
-
   getMenuItemPath = item => {
-    const {location, isMobile, onCollapse} = this.props;
     const itemPath = this.conversionPath(item.path);
     const icon = getIcon(item.icon);
     const { target, name } = item;
@@ -97,6 +98,7 @@ export default class SiderMenu extends PureComponent {
         </a>
       );
     }
+    const { location, isMobile, onCollapse } = this.props;
     return (
       <Link
         to={itemPath}
@@ -115,10 +117,10 @@ export default class SiderMenu extends PureComponent {
       </Link>
     );
   };
+
   /**
    * get SubMenu or Item
    */
-
   getSubMenuOrItem = item => {
     if (item.children && item.children.some(child => child.name)) {
       const childrenItems = this.getNavMenuItems(item.children);
@@ -147,11 +149,11 @@ export default class SiderMenu extends PureComponent {
       return <Menu.Item key={item.path}>{this.getMenuItemPath(item)}</Menu.Item>;
     }
   };
+
   /**
    * 获得菜单子节点
    * @memberof SiderMenu
    */
-
   getNavMenuItems = menusData => {
     if (!menusData) {
       return [];
@@ -165,15 +167,17 @@ export default class SiderMenu extends PureComponent {
       })
       .filter(item => item);
   };
-  // Get the currently selected menu
 
+  // Get the currently selected menu
   getSelectedMenuKeys = () => {
-    const { location: { pathname } } = this.props;
+    const {
+      location: { pathname },
+    } = this.props;
     return getMenuMatchKeys(this.flatMenuKeys, urlToList(pathname));
   };
+
   // conversion Path
   // 转化路径
-
   conversionPath = path => {
     if (path && path.indexOf('http') === 0) {
       return path;
@@ -181,10 +185,10 @@ export default class SiderMenu extends PureComponent {
       return `/${path || ''}`.replace(/\/+/g, '/');
     }
   };
-  // permission to check
 
+  // permission to check
   checkPermissionItem = (authority, ItemDom) => {
-    const {Authorized} = this.props;
+    const { Authorized } = this.props;
     if (Authorized && Authorized.check) {
       const { check } = Authorized;
       return check(authority, ItemDom);

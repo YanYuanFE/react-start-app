@@ -5,7 +5,6 @@ function fixedZero(val) {
 }
 
 class CountDown extends Component {
-
   timer = 0;
 
   interval = 1000;
@@ -62,10 +61,10 @@ class CountDown extends Component {
       lastTime: lastTime < 0 ? 0 : lastTime,
     };
   };
+
   // defaultFormat = time => (
   //  <span>{moment(time).format('hh:mm:ss')}</span>
   // );
-
   defaultFormat = time => {
     const hours = 60 * 60 * 1000;
     const minutes = 60 * 1000;
@@ -75,7 +74,11 @@ class CountDown extends Component {
     const s = Math.floor((time - h * hours - m * minutes) / 1000);
     return (
       <span>
-        {fixedZero(h)}:{fixedZero(m)}:{fixedZero(s)}
+        {fixedZero(h)}
+        :
+        {fixedZero(m)}
+        :
+        {fixedZero(s)}
       </span>
     );
   };

@@ -8,7 +8,6 @@ import LoginSubmit from './LoginSubmit';
 import styles from './index.less';
 
 class Login extends Component {
-
   static propTypes = {
     className: PropTypes.string,
     defaultActiveKey: PropTypes.string,
@@ -39,8 +38,8 @@ class Login extends Component {
   }
 
   getChildContext() {
-    const { form } = this.props;
     const { tabs } = this.state;
+    const { form } = this.props;
     return {
       tabUtil: {
         addTab: id => {
@@ -78,9 +77,9 @@ class Login extends Component {
   };
 
   handleSubmit = e => {
-    const { form, onSubmit } = this.props;
     e.preventDefault();
     const { active, type } = this.state;
+    const { form, onSubmit } = this.props;
     const activeFileds = active[type];
     form.validateFields(activeFileds, { force: true }, (err, values) => {
       onSubmit(err, values);
