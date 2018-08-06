@@ -24,7 +24,7 @@
     "react-loadable": "^5.4.0"
   },
   "scripts": {
-    "start": "webpack-dev-server --colors --profile --display-modules --json > compilation-stats.json --inline --progress --config ./config/webpack.config.dev.js",
+    "start": "webpack-dev-server --colors --profile --display-modules --inline --progress --config ./config/webpack.config.dev.js",
     "build": "webpack --progress --config ./config/webpack.config.prod.js",
     "test": "node scripts/test.js --env=jsdom"
   },
@@ -63,7 +63,7 @@
     "sass-loader": "^7.0.3",
     "style-loader": "^0.21.0",
     "url-loader": "^1.0.1",
-    "webpack": "^4.14.0",
+    "webpack": "^4.16.1",
     "webpack-cli": "^3.0.8",
     "webpack-dashboard": "^2.0.0",
     "webpack-dev-server": "^3.1.4",

@@ -46,18 +46,18 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
+        enforce: 'pre',
+        loader: 'eslint-loader',
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
             cacheDirectory: false,
           },
         },
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        enforce: 'pre',
-        loader: 'eslint-loader',
       },
       {
         test: /\.(woff|woff2|eot|ttf)$/,
