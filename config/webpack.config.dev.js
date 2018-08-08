@@ -2,6 +2,9 @@ const path = require('path');
 const merge = require('webpack-merge');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+
+const smp = new SpeedMeasurePlugin();
 // const Dashboard = require('webpack-dashboard');
 // var DashboardPlugin = require('webpack-dashboard/plugin');
 const common = require('./webpack.config.base');
@@ -14,7 +17,7 @@ function resolve(dir) {
 
 const theme = getThemeConfig();
 
-module.exports = merge(common, {
+let mergedConfig = merge(common, {
   mode: 'development',
   devtool: 'cheap-module-eval-source-map',
   performance: {
@@ -45,7 +48,7 @@ module.exports = merge(common, {
       },
       {
         test: /.less$/,  // antd 中的less
-        exclude: /src/,
+        include: /node_modules/,
         // include: path.resolve(__dirname, 'node_modules/antd'),
         use: [
           {
@@ -113,3 +116,5 @@ module.exports = merge(common, {
     }),
   ],
 });
+
+module.exports = smp.wrap(mergedConfig);
