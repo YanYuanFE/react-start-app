@@ -14,12 +14,12 @@
 
 ## 特性
 *  :gem: 基于React，Ant Design，dva等企业级后台管理系统最佳实践。
-*  :art: 基于Ant Design 和Ant Pro UI组件库，提供后台管理系统常见使用场景。
+*  :art: 基于Ant Design和Ant Pro UI组件库，提供后台管理系统常见使用场景。
 *  :nail_care: 基于CSS Module的样式解决方案。
 *  :airplane: 基于dva动态加载 Model 和路由，按需加载。
 *  :rocket: 基于webpack4.x本地调试和构建。
 *  :iphone: 响应式设计。
-
+*  :triangular_ruler: Eslint && husky统一代码规范。
 
 ## 开发构建
 
