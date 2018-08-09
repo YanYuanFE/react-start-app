@@ -1,5 +1,5 @@
 {
-  "name": "{{name}}",
+  "name": "react-starta-app",
   "version": "1.0.0",
   "description": "An scaffold for React applications",
   "private": true,
