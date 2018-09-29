@@ -130,7 +130,9 @@
   },
   "parserOptions": {
     "ecmaFeatures": {
-      "ecmaVersion": 2018
+      "ecmaVersion": 2018,
+      "legacyDecorators": true,
+      "experimentalObjectRestSpread": true
     }
   },
   "settings": {
