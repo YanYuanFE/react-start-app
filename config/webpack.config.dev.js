@@ -107,7 +107,7 @@ let mergedConfig = merge(common, {
   },
   plugins: [
     // new DashboardPlugin(dashboard.setData),
-    new webpack.NamedModulesPlugin(),
+    new webpack.NamedModulesPlugin(), //开启 HMR时该插件会显示模块的相对路径
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: resolve('index.html'),
