@@ -2,11 +2,11 @@ const path = require('path');
 const merge = require('webpack-merge');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+// const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
 
-const smp = new SpeedMeasurePlugin();
+// const smp = new SpeedMeasurePlugin();
 // const Dashboard = require('webpack-dashboard');
-// var DashboardPlugin = require('webpack-dashboard/plugin');
+// const DashboardPlugin = require('webpack-dashboard/plugin');
 const common = require('./webpack.config.base');
 const getThemeConfig = require('../theme.js');
 // const dashboard = new Dashboard();
@@ -17,7 +17,7 @@ function resolve(dir) {
 
 const theme = getThemeConfig();
 
-let mergedConfig = merge(common, {
+const mergedConfig = merge(common, {
   mode: 'development',
   devtool: 'cheap-module-eval-source-map',
   performance: {
@@ -107,7 +107,7 @@ let mergedConfig = merge(common, {
   },
   plugins: [
     // new DashboardPlugin(dashboard.setData),
-    new webpack.NamedModulesPlugin(), //开启 HMR时该插件会显示模块的相对路径
+    new webpack.NamedModulesPlugin(),  // 开启 HMR时该插件会显示模块的相对路径
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: resolve('index.html'),
@@ -117,4 +117,5 @@ let mergedConfig = merge(common, {
   ],
 });
 
-module.exports = smp.wrap(mergedConfig);
+// module.exports = smp.wrap(mergedConfig);
+module.exports = mergedConfig;

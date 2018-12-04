@@ -60,19 +60,12 @@ module.exports = merge(common, {
       },
       {
         test: /.less$/,  // antd 中的less
-        exclude: [/src/],
+        include: resolve('node_modules'),
+        // exclude: [/src/],
         // include: path.resolve(__dirname, 'node_modules/antd'),
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 2,
-              sourceMap: true,
-            },
-          },
+          MiniCssExtractPlugin.loader,
+          'css-loader',
           'postcss-loader',
           {
             loader: 'less-loader',
@@ -87,7 +80,8 @@ module.exports = merge(common, {
       },
       {
         test: /\.less$/,
-        exclude: resolve('node_modules'),
+        include: resolve('src'),
+        // exclude: [/node_modules/],
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -96,7 +90,6 @@ module.exports = merge(common, {
               modules: true,
               localIdentName: '[local]--[hash:base64:5]',
               importLoaders: 2,
-              sourceMap: true,
             },
           },
           'postcss-loader',
@@ -142,8 +135,8 @@ module.exports = merge(common, {
       'process.env.NODE_ENV': JSON.stringify('production'),
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].[hash].css',
-      chunkFilename: '[id].[hash].css',
+      filename: '[name].css',
+      chunkFilename: '[id].css',
     }),
     new webpack.HashedModuleIdsPlugin(), // 根据模块的相对路径生成一个四位数的hash作为模块id, 建议用于生产环境
     new UglifyJsPlugin({

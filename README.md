@@ -1,25 +1,25 @@
 ## react-start-app
 
-### 基于Ant Design的React脚手架，开箱即用
+### 基于 Ant Design 的 React 脚手架，开箱即用
 
 > A React start project
 
 
 ## 技术栈
 
-*  React
+*  React16
 *  Ant Design and Ant Pro
 *  dva
 *  Webpack 4.x
 
 ## 特性
-*  :gem: 基于React，Ant Design，dva等企业级后台管理系统最佳实践。
-*  :art: 基于Ant Design和Ant Pro UI组件库，提供后台管理系统常见使用场景。
-*  :nail_care: 基于CSS Module的样式解决方案。
-*  :airplane: 基于dva动态加载 Model 和路由，按需加载。
-*  :rocket: 基于webpack4.x本地调试和构建。
+*  :gem: 基于 React，Ant Design，dva 等企业级后台管理系统最佳实践。
+*  :art: 基于 Ant Design 设计语言和 Ant Pro UI 组件库，提供后台管理系统常见使用场景。
+*  :nail_care: 基于 CSS Module 的样式解决方案。
+*  :airplane: 基于 dva 动态加载 Model 和路由，按需加载。
+*  :rocket: 基于 webpack4.x 本地调试和构建。
 *  :iphone: 响应式设计。
-*  :triangular_ruler: Eslint && husky统一代码规范。
+*  :triangular_ruler: Eslint && husky 统一代码规范。
 
 ## 开发构建
 
