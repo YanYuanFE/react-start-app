@@ -41,6 +41,19 @@ module.exports = merge(common, {
         },
       },
     },
+    minimizer: [
+      new UglifyJsPlugin({
+        test: /\.js($|\?)/i,
+        include: /\/src/,
+        sourceMap: true,
+        parallel: true,
+        cache: true,
+        uglifyOptions: {
+          ie8: false,
+          ecma: 8,
+        },
+      }),
+    ],
   },
   module: {
     rules: [
@@ -135,14 +148,9 @@ module.exports = merge(common, {
       'process.env.NODE_ENV': JSON.stringify('production'),
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
+      filename: 'css/[name].[hash].css',
+      chunkFilename: 'css/[id].[hash].css',
     }),
     new webpack.HashedModuleIdsPlugin(), // 根据模块的相对路径生成一个四位数的hash作为模块id, 建议用于生产环境
-    new UglifyJsPlugin({
-      test: /\.js($|\?)/i,
-      exclude: /\/node_modules/,
-      sourceMap: true,
-    }),
   ],
 });

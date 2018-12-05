@@ -8,12 +8,12 @@ module.exports = {
   context: path.resolve(__dirname, "../"),
   entry: {
     app: "./src/index.js",
-    vendor: ["react", "react-dom"]
+    vendor: ["react", "react-dom"],
   },
   output: {
-    filename: "[name].[hash].js",
+    filename: "js/[name].[hash].js",
     path: path.resolve(__dirname, "../dist"),
-    chunkFilename: "[name].bundle.js"
+    chunkFilename: "js/[name].bundle.js",
   },
   resolve: {
     extensions: [".js", ".jsx", ".json"],
@@ -26,20 +26,20 @@ module.exports = {
       layouts: resolve("src/layouts"),
       services: resolve("src/services"),
       components: resolve("src/components"),
-      common: resolve("src/common")
-    }
+      common: resolve("src/common"),
+    },
   },
   module: {
     rules: [
       {
         test: /\.s[ac]ss$/,
-        use: ["style-loader", "css-loader", "postcss-loader", "sass-loader"]
+        use: ["style-loader", "css-loader", "postcss-loader", "sass-loader"],
       },
       {
         test: /\.js$/,
         include: /src/,
         enforce: "pre",
-        loader: "eslint-loader"
+        loader: "eslint-loader",
       },
       {
         test: /\.js$/,
@@ -47,9 +47,9 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            cacheDirectory: true
-          }
-        }
+            cacheDirectory: true,
+          },
+        },
       },
       {
         test: /\.(woff|woff2|eot|ttf)$/,
@@ -57,15 +57,15 @@ module.exports = {
           {
             loader: "url-loader",
             options: {
-              limit: 1000
-            }
-          }
-        ]
+              limit: 1000,
+            },
+          },
+        ],
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/,
-        loader: "file-loader?name=i/[name].[ext]"
-      }
-    ]
-  }
+        loader: "file-loader?name=images/[name].[ext]",
+      },
+    ],
+  },
 };
