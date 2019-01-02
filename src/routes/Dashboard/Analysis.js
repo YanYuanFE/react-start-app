@@ -82,7 +82,7 @@ export default class Analysis extends Component {
                 <Row>
                   <Col xl={16} lg={12} md={12} sm={24} xs={24}>
                     <div className={styles.salesBar}>
-                      111
+                      销售额
                     </div>
                   </Col>
                   <Col xl={8} lg={12} md={12} sm={24} xs={24}>
@@ -108,7 +108,7 @@ export default class Analysis extends Component {
                 <Row>
                   <Col xl={16} lg={12} md={12} sm={24} xs={24}>
                     <div className={styles.salesBar}>
-                      111
+                      访问量
                     </div>
                   </Col>
                   <Col xl={8} lg={12} md={12} sm={24} xs={24}>
@@ -130,9 +130,9 @@ export default class Analysis extends Component {
               bordered={false}
               title="线上热门搜索"
               extra={iconGroup}
-              style={{ marginTop: 24 }}
+              style={{ marginTop: 24, minHeight: 509 }}
             >
-              111
+              线上热门搜索
             </Card>
           </Col>
           <Col xl={12} lg={24} md={24} sm={24} xs={24}>

@@ -13,6 +13,7 @@
     "jasmine": true
   },
   "rules": {
+    "linebreak-style": 0,
     "generator-star-spacing": [
       0
     ],

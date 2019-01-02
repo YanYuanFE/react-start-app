@@ -29,7 +29,7 @@
 ├── /dist/           # 项目输出目录
 ├── /src/            # 项目源码目录
 │ ├── /assets/       # 图片资源
-│ ├── /common/       # 公共文件，编译时copy至dist目录
+│ ├── /common/       # 公共配置文件，菜单、路由
 │ │ ├── munu.js      # 侧边栏菜单配置
 │ │ └── router.js    # 路由配置
 │ ├── /components/   # UI组件
@@ -39,15 +39,15 @@
 │ ├── /services/     # 数据接口
 │ ├── /utils/        # 工具函数
 │ │ ├── authority.js # 权限工具函数
-│ │ ├── Authorized.js# 权限配置
+│ │ ├── Authorized.js # 权限配置
 │ │ ├── utils.js     # 工具函数
 │ │ ├── request.js   # 异步请求函数
 │ │ └── utils.less   # 工具样式
 │ ├── route.js       # 路由入口
 │ ├── index.js       # 入口文件
-│ ├── themes.js      # 自定义主题样式
+│ ├── themes.js      # 自定义antd主题变量
 │ └── index.html
-├── postcss.config.js# postcss配置
+├── postcss.config.js # postcss配置
 ├── package.json     # 项目依赖
 ├── .eslintrc        # ESlint配置
 └── .babelrc         # babel配置
@@ -60,6 +60,14 @@
 ```bash
 git clone https://github.com/YanYuanFE/react-start-app
 ```
+推荐使用[react-start-cli](https://github.com/YanYuanFE/react-start-cli)初始化项目：
+
+```bash
+npm install react-start-cli -g
+
+react-start-cli init [projectName]
+```
+
 
 进入目录安装依赖:
 

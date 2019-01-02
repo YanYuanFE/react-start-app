@@ -1,61 +1,67 @@
-const path = require("path");
+const path = require('path');
 
 function resolve(dir) {
-  return path.join(__dirname, "..", dir);
+  return path.join(__dirname, '..', dir);
 }
 
 module.exports = {
-  context: path.resolve(__dirname, "../"),
+  context: path.resolve(__dirname, '../'),
   entry: {
-    app: "./src/index.js",
-    vendor: ["react", "react-dom"],
+    app: './src/index.js',
+    vendor: ['react', 'react-dom'],
   },
   output: {
-    filename: "js/[name].[hash].js",
-    path: path.resolve(__dirname, "../dist"),
-    chunkFilename: "js/[name].bundle.js",
+    filename: 'js/[name].[hash].js',
+    path: path.resolve(__dirname, '../dist'),
+    chunkFilename: 'js/[name].bundle.js',
   },
   resolve: {
-    extensions: [".js", ".jsx", ".json"],
-    modules: ["node_modules", path.resolve(__dirname, "src")],
+    extensions: ['.js', '.jsx', '.json'],
+    modules: ['node_modules', path.resolve(__dirname, 'src')],
     alias: {
-      src: resolve("src"),
-      assets: resolve("assets"),
-      models: resolve("src/models"),
-      utils: resolve("src/utils"),
-      layouts: resolve("src/layouts"),
-      services: resolve("src/services"),
-      components: resolve("src/components"),
-      common: resolve("src/common"),
+      src: resolve('src'),
+      assets: resolve('assets'),
+      models: resolve('src/models'),
+      utils: resolve('src/utils'),
+      layouts: resolve('src/layouts'),
+      services: resolve('src/services'),
+      components: resolve('src/components'),
+      common: resolve('src/common'),
     },
   },
   module: {
     rules: [
       {
         test: /\.s[ac]ss$/,
-        use: ["style-loader", "css-loader", "postcss-loader", "sass-loader"],
+        use: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader'],
       },
       {
         test: /\.js$/,
         include: /src/,
-        enforce: "pre",
-        loader: "eslint-loader",
+        enforce: 'pre',
+        use: 'eslint-loader',
       },
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            cacheDirectory: true,
-          },
-        },
+        use: 'happypack/loader?id=jsx',
+        // use: [
+        //   {
+        //     loader: 'thread-loader',
+        //   },
+        //   {
+        //     loader: 'babel-loader',
+        //     options: {
+        //       cacheDirectory: true,
+        //     },
+        //   },
+        // ],
       },
       {
         test: /\.(woff|woff2|eot|ttf)$/,
         use: [
           {
-            loader: "url-loader",
+            loader: 'url-loader',
             options: {
               limit: 1000,
             },
@@ -64,7 +70,7 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/,
-        loader: "file-loader?name=images/[name].[ext]",
+        loader: 'file-loader?name=images/[name].[ext]',
       },
     ],
   },

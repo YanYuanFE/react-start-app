@@ -7,7 +7,6 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const common = require('./webpack.config.base');
-
 const getThemeConfig = require('../theme.js');
 
 const theme = getThemeConfig();
