@@ -4,7 +4,7 @@
     "dva-hmr",
     ["@babel/plugin-proposal-decorators", { "legacy": true }],
     "@babel/plugin-syntax-dynamic-import",
-    "@babel/plugin-proposal-class-properties",
+    ["@babel/plugin-proposal-class-properties", { "loose": true }],
     "@babel/plugin-transform-runtime",
     [
       "import", {
