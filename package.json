@@ -1,5 +1,5 @@
 {
-  "name": "react",
+  "name": "{{name}}",
   "version": "1.0.0",
   "description": "An scaffold for React applications",
   "private": true,
@@ -15,7 +15,7 @@
     "moment": "^2.22.2",
     "omit.js": "^1.0.0",
     "path-to-regexp": "^2.2.1",
-    "prop-types": "^15.7.0",
+    "prop-types": "^15.7.1",
     "rc-drawer": "^1.5.3",
     "react": "^16.8.1",
     "react-container-query": "^0.11.0",
