@@ -3631,6 +3631,20 @@ find-parent-dir@^0.3.0:
   resolved "http://npm.bbdops.com/find-parent-dir/-/find-parent-dir-0.3.0.tgz#33c44b429ab2b2f0646299c5f9f718f376ff8d54"
   integrity sha1-M8RLQpqysvBkYpnF+fcY83b/jVQ=
 
+find-cache-dir@^2.0.0:
+  version "2.0.0"
+  resolved "http://npm.bbdops.com/find-cache-dir/-/find-cache-dir-2.0.0.tgz#4c1faed59f45184530fb9d7fa123a4d04a98472d"
+  integrity sha1-TB+u1Z9FGEUw+51/oSOk0EqYRy0=
+  dependencies:
+    commondir "^1.0.1"
+    make-dir "^1.0.0"
+    pkg-dir "^3.0.0"
+
+find-parent-dir@^0.3.0:
+  version "0.3.0"
+  resolved "http://npm.bbdops.com/find-parent-dir/-/find-parent-dir-0.3.0.tgz#33c44b429ab2b2f0646299c5f9f718f376ff8d54"
+  integrity sha1-M8RLQpqysvBkYpnF+fcY83b/jVQ=
+
 find-up@^1.0.0:
   version "1.1.2"
   resolved "http://npm.bbdops.com/find-up/-/find-up-1.1.2.tgz#6b2e9822b1a2ce0a60ab64d610eccad53cb24d0f"
@@ -5379,6 +5393,15 @@ mem@^4.0.0:
     map-age-cleaner "^0.1.1"
     mimic-fn "^1.0.0"
     p-is-promise "^2.0.0"
+
+mem@^4.0.0:
+  version "4.0.0"
+  resolved "http://npm.bbdops.com/mem/-/mem-4.0.0.tgz#6437690d9471678f6cc83659c00cbafcd6b0cdaf"
+  integrity sha1-ZDdpDZRxZ49syDZZwAy6/Nawza8=
+  dependencies:
+    map-age-cleaner "^0.1.1"
+    mimic-fn "^1.0.0"
+    p-is-promise "^1.1.0"
 
 memory-fs@^0.4.0, memory-fs@~0.4.1:
   version "0.4.1"
@@ -7141,6 +7164,7 @@ rc-input-number@~4.3.7:
     babel-runtime "6.x"
     classnames "^2.2.0"
     is-negative-zero "^2.0.0"
+    omit.js "^1.0.0"
     prop-types "^15.5.7"
     rc-util "^4.5.1"
     rmc-feedback "^2.0.0"
@@ -7322,7 +7346,7 @@ rc-tree@~1.14.3, rc-tree@~1.14.6:
   integrity sha1-omY0tAESNHHhhyc90v1EDea4WVg=
   dependencies:
     babel-runtime "^6.23.0"
-    classnames "2.x"
+    classnames "^2.2.1"
     prop-types "^15.5.8"
     rc-animate "^3.0.0-rc.5"
     rc-util "^4.5.1"
@@ -8408,6 +8432,13 @@ speed-measure-webpack-plugin@^1.2.2:
   version "1.3.0"
   resolved "http://npm.bbdops.com/speed-measure-webpack-plugin/-/speed-measure-webpack-plugin-1.3.0.tgz#c7ffafef513df3d63d5d546c8fc1986dfc4969aa"
   integrity sha1-x/+v71E989Y9XVRsj8GYbfxJaao=
+  dependencies:
+    chalk "^2.0.1"
+
+speed-measure-webpack-plugin@^1.2.2:
+  version "1.2.3"
+  resolved "http://npm.bbdops.com/speed-measure-webpack-plugin/-/speed-measure-webpack-plugin-1.2.3.tgz#de170b5cefbfa1c039d95e639edd3ad50cfc7c48"
+  integrity sha1-3hcLXO+/ocA52V5jnt061Qz8fEg=
   dependencies:
     chalk "^2.0.1"
 

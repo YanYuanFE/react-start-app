@@ -7,7 +7,6 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const common = require('./webpack.config.base');
-
 const getThemeConfig = require('../theme.js');
 
 const theme = getThemeConfig();
@@ -41,6 +40,19 @@ module.exports = merge(common, {
         },
       },
     },
+    minimizer: [
+      new UglifyJsPlugin({
+        test: /\.js($|\?)/i,
+        include: /\/src/,
+        sourceMap: true,
+        parallel: true,
+        cache: true,
+        uglifyOptions: {
+          ie8: false,
+          ecma: 8,
+        },
+      }),
+    ],
   },
   module: {
     rules: [
@@ -60,19 +72,12 @@ module.exports = merge(common, {
       },
       {
         test: /.less$/,  // antd 中的less
-        exclude: [/src/],
+        include: resolve('node_modules'),
+        // exclude: [/src/],
         // include: path.resolve(__dirname, 'node_modules/antd'),
         use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 2,
-              sourceMap: true,
-            },
-          },
+          MiniCssExtractPlugin.loader,
+          'css-loader',
           'postcss-loader',
           {
             loader: 'less-loader',
@@ -87,7 +92,8 @@ module.exports = merge(common, {
       },
       {
         test: /\.less$/,
-        exclude: resolve('node_modules'),
+        include: resolve('src'),
+        // exclude: [/node_modules/],
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -96,7 +102,6 @@ module.exports = merge(common, {
               modules: true,
               localIdentName: '[local]--[hash:base64:5]',
               importLoaders: 2,
-              sourceMap: true,
             },
           },
           'postcss-loader',
@@ -142,14 +147,9 @@ module.exports = merge(common, {
       'process.env.NODE_ENV': JSON.stringify('production'),
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].[hash].css',
-      chunkFilename: '[id].[hash].css',
+      filename: 'css/[name].[hash].css',
+      chunkFilename: 'css/[id].[hash].css',
     }),
     new webpack.HashedModuleIdsPlugin(), // 根据模块的相对路径生成一个四位数的hash作为模块id, 建议用于生产环境
-    new UglifyJsPlugin({
-      test: /\.js($|\?)/i,
-      exclude: /\/node_modules/,
-      sourceMap: true,
-    }),
   ],
 });

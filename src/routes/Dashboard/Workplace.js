@@ -151,42 +151,18 @@ export default class Workplace extends PureComponent {
               title="进行中的项目"
               bordered={false}
               extra={<Link to="/">全部项目</Link>}
-              loading={projectLoading}
               bodyStyle={{ padding: 0 }}
             >
-              {notice.map(item => (
-                <Card.Grid className={styles.projectGrid} key={item.id}>
-                  <Card bodyStyle={{ padding: 0 }} bordered={false}>
-                    <Card.Meta
-                      title={
-                        <div className={styles.cardTitle}>
-                          <Avatar size="small" src={item.logo} />
-                          <Link to={item.href}>{item.title}</Link>
-                        </div>
-                      }
-                      description={item.description}
-                    />
-                    <div className={styles.projectItemContent}>
-                      <Link to={item.memberLink}>{item.member || ''}</Link>
-                      {item.updatedAt && (
-                        <span className={styles.datetime} title={item.updatedAt}>
-                          {moment(item.updatedAt).fromNow()}
-                        </span>
-                      )}
-                    </div>
-                  </Card>
-                </Card.Grid>
-              ))}
+              Card
             </Card>
             <Card
               bodyStyle={{ padding: 0 }}
               bordered={false}
               className={styles.activeCard}
               title="动态"
-              loading={activitiesLoading}
             >
-              <List loading={activitiesLoading} size="large">
-                <div className={styles.activitiesList}>{this.renderActivities()}</div>
+              <List size="large">
+                <div className={styles.activitiesList}>动态</div>
               </List>
             </Card>
           </Col>

@@ -38,7 +38,7 @@ export default class Monitor extends PureComponent {
           </Col>
           <Col xl={6} lg={24} md={24} sm={24} xs={24}>
             <Card title="活动情况预测" style={{ marginBottom: 24 }} bordered={false}>
-              1111
+              活动情况预测
             </Card>
             <Card
               title="券核效率"
@@ -46,14 +46,14 @@ export default class Monitor extends PureComponent {
               bodyStyle={{ textAlign: 'center' }}
               bordered={false}
             >
-              1111
+              券核效率
             </Card>
           </Col>
         </Row>
         <Row gutter={24}>
           <Col xl={12} lg={24} sm={24} xs={24}>
             <Card title="各品类占比" bordered={false} className={styles.pieCard}>
-              111
+              各品类占比
             </Card>
           </Col>
           <Col xl={6} lg={12} sm={24} xs={24}>
@@ -63,7 +63,7 @@ export default class Monitor extends PureComponent {
               bordered={false}
               bodyStyle={{ overflow: 'hidden' }}
             >
-              111
+              热门搜索
             </Card>
           </Col>
           <Col xl={6} lg={12} sm={24} xs={24}>
@@ -72,7 +72,7 @@ export default class Monitor extends PureComponent {
               bodyStyle={{ textAlign: 'center', fontSize: 0 }}
               bordered={false}
             >
-              111
+              资源剩余
             </Card>
           </Col>
         </Row>
