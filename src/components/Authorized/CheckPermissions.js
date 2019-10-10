@@ -74,6 +74,7 @@ const checkPermissions = (authority, currentAuthority, target, Exception) => {
       }
       return Exception;
     } catch (error) {
+      console.error(error);
       throw error;
     }
   }

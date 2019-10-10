@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'dva';
 import { Row, Col, Card, Tooltip } from 'antd';
 import Authorized from '../../utils/Authorized';
@@ -22,7 +22,7 @@ export default class Monitor extends PureComponent {
     const { loading } = this.props;
 
     return (
-      <Fragment>
+      <>
         <Row gutter={24}>
           <Col xl={18} lg={24} md={24} sm={24} xs={24} style={{ marginBottom: 24 }}>
             <Card title="活动实时交易情况" bordered={false}>
@@ -76,7 +76,7 @@ export default class Monitor extends PureComponent {
             </Card>
           </Col>
         </Row>
-      </Fragment>
+      </>
     );
   }
 }

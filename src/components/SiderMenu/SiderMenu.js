@@ -1,12 +1,13 @@
 import React, { PureComponent } from 'react';
 import { Layout, Menu, Icon } from 'antd';
 import pathToRegexp from 'path-to-regexp';
-import { Link } from 'dva/router';
+import { router } from 'dva';
 import styles from './index.less';
 import { urlToList } from '../_utils/pathTools';
 
 const { Sider } = Layout;
 const { SubMenu } = Menu;
+const { Link } = router;
 
 // Allow menu.js config icon as string or ReactNode
 //   icon: 'setting',
@@ -58,7 +59,7 @@ export default class SiderMenu extends PureComponent {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { location } = this.props;
     if (nextProps.location.pathname !== location.pathname) {
       this.setState({

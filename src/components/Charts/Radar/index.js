@@ -15,7 +15,7 @@ export default class Radar extends Component {
     this.getLengendData();
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { data } = this.props;
     if (data !== nextProps.data) {
       this.getLengendData();

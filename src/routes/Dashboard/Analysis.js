@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import {
   Row,
   Col,
@@ -25,9 +25,12 @@ for (let i = 0; i < 7; i += 1) {
 }
 
 export default class Analysis extends Component {
-  state = {
-    salesType: 'all',
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      salesType: 'all',
+    };
+  }
 
   handleChangeSalesType = e => {
     this.setState({
@@ -74,7 +77,7 @@ export default class Analysis extends Component {
     );
 
     return (
-      <Fragment>
+      <>
         <Card bordered={false} bodyStyle={{ padding: 0 }}>
           <div className={styles.salesCard}>
             <Tabs tabBarExtraContent={salesExtra} size="large" tabBarStyle={{ marginBottom: 24 }}>
@@ -167,7 +170,7 @@ export default class Analysis extends Component {
             </Card>
           </Col>
         </Row>
-      </Fragment>
+      </>
     );
   }
 }

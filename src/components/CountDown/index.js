@@ -23,7 +23,7 @@ class CountDown extends Component {
     this.tick();
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { target } = this.props;
     if (target !== nextProps.target) {
       clearTimeout(this.timer);

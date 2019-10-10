@@ -1,7 +1,9 @@
 import React from 'react';
-import { Link } from 'dva/router';
+import { router } from 'dva';
 import PageHeader from '../components/PageHeader';
 import styles from './PageHeaderLayout.less';
+
+const { Link } = router;
 
 export default ({ children, wrapperClassName, top, ...restProps }) => (
   <div style={{ margin: '-24px -24px 0' }} className={wrapperClassName}>

@@ -1,9 +1,8 @@
-import React, { Fragment } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { Layout, Icon, message } from 'antd';
 import DocumentTitle from 'react-document-title';
-import { connect } from 'dva';
-import { Route, Redirect, Switch, routerRedux } from 'dva/router';
+import { connect, router } from 'dva';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
 import pathToRegexp from 'path-to-regexp';
@@ -19,6 +18,7 @@ import logo from '../assets/logo.svg';
 
 const { Content, Header, Footer } = Layout;
 const { AuthorizedRoute, check } = Authorized;
+const { Route, Redirect, Switch, routerRedux } = router;
 
 /**
  * 根据菜单取得重定向地址.
@@ -46,16 +46,16 @@ getMenuData().forEach(getRedirect);
  */
 const getBreadcrumbNameMap = (menuData, routerData) => {
   const result = {};
-  const childResult = {};
+  let childResult = {};
   for (const i of menuData) {
     if (!routerData[i.path]) {
       result[i.path] = i;
     }
     if (i.children) {
-      Object.assign(childResult, getBreadcrumbNameMap(i.children, routerData));
+      childResult = getBreadcrumbNameMap(i.children, routerData);
     }
   }
-  return Object.assign({}, routerData, result, childResult);
+  return {...routerData, ...result, ...childResult};
 };
 
 const query = {
@@ -84,7 +84,7 @@ enquireScreen(b => {
   isMobile = b;
 });
 
-class BasicLayout extends React.PureComponent {
+class BasicLayout extends PureComponent {
   static childContextTypes = {
     location: PropTypes.object,
     breadcrumbNameMap: PropTypes.object,
@@ -138,7 +138,6 @@ class BasicLayout extends React.PureComponent {
 
     const redirect = urlParams[1] && urlParams[1].substr(1);
     // Remove the parameters in the url
-    console.log(redirect);
     if (redirect) {
       window.history.replaceState(null, 'redirect', redirect);
     } else {
@@ -203,6 +202,7 @@ class BasicLayout extends React.PureComponent {
     } = this.props;
     const {isMobile : ismobile} = this.state;
     const bashRedirect = this.getBashRedirect();
+    console.log(routerData);
     const layout = (
       <Layout>
         <SiderMenu
@@ -274,9 +274,9 @@ class BasicLayout extends React.PureComponent {
                 },
               ]}
               copyright={
-                <Fragment>
+                <>
                   Copyright <Icon type="copyright" /> 2018 蚂蚁金服体验技术部出品
-                </Fragment>
+                </>
               }
             />
           </Footer>

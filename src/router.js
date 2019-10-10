@@ -1,20 +1,22 @@
 import React from 'react';
-import { routerRedux, Route, Switch } from 'dva/router';
-import { LocaleProvider } from 'antd';
+import { router, routerRedux } from 'dva';
+import { ConfigProvider } from 'antd';
 import zhCN from 'antd/lib/locale-provider/zh_CN';
 import { getRouterData } from './common/router';
 import Authorized from './utils/Authorized';
 import { getQueryPath } from './utils/utils';
 
-const { ConnectedRouter } = routerRedux;
 const { AuthorizedRoute } = Authorized;
+const { Route, Switch } = router;
+const { ConnectedRouter } = routerRedux;
 
-function RouterConfig({ history, app }) {
+function RouterConfig(api) {
+  const { history, app } = api;
   const routerData = getRouterData(app);
   const UserLayout = routerData['/user'].component;
   const BasicLayout = routerData['/'].component;
   return (
-    <LocaleProvider locale={zhCN}>
+    <ConfigProvider locale={zhCN}>
       <ConnectedRouter history={history}>
         <Switch>
           <Route path="/user" component={UserLayout} />
@@ -28,7 +30,7 @@ function RouterConfig({ history, app }) {
           />
         </Switch>
       </ConnectedRouter>
-    </LocaleProvider>
+    </ConfigProvider>
   );
 }
 

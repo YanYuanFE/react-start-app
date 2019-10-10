@@ -7,7 +7,6 @@ import styles from './index.less';
 const { TabPane } = Tabs;
 
 export default class NoticeIcon extends PureComponent {
-  static Tab = TabPane;
 
   static defaultProps = {
     onItemClick: () => {},
@@ -64,6 +63,7 @@ export default class NoticeIcon extends PureComponent {
         </TabPane>
       );
     });
+
     return (
       <Spin spinning={loading} delay={0}>
         <Tabs className={styles.tabs} onChange={this.onTabChange}>
@@ -72,6 +72,8 @@ export default class NoticeIcon extends PureComponent {
       </Spin>
     );
   }
+
+  static Tab = TabPane;
 
   render() {
     const { className, count, popupAlign, onPopupVisibleChange, popupVisible } = this.props;

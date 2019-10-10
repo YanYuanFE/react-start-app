@@ -14,6 +14,8 @@
   },
   "rules": {
     "linebreak-style": 0,
+    "camelcase": 0,
+    "no-console": 0,
     "generator-star-spacing": [
       0
     ],
@@ -23,6 +25,9 @@
     "react/forbid-prop-types": [
       0
     ],
+    "react/state-in-constructor": [0],
+    "react/static-property-placement": [0],
+    "react/jsx-props-no-spreading": [0],
     "react/jsx-one-expression-per-line": [
       0
     ],

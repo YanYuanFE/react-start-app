@@ -24,7 +24,7 @@ class TagCloud extends Component {
     window.addEventListener('resize', this.resize);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { data } = this.props;
     if (JSON.stringify(nextProps.data) !== JSON.stringify(data)) {
       this.renderChart(nextProps);
@@ -46,10 +46,9 @@ class TagCloud extends Component {
 
   initTagCloud = () => {
     function getTextAttrs(cfg) {
-      return Object.assign(
-        {},
-        {
-          fillOpacity: cfg.opacity,
+      return {
+        
+        fillOpacity: cfg.opacity,
           fontSize: cfg.origin._origin.size,
           rotate: cfg.origin._origin.rotate,
           text: cfg.origin._origin.text,
@@ -57,9 +56,8 @@ class TagCloud extends Component {
           fontFamily: cfg.origin._origin.font,
           fill: cfg.color,
           textBaseline: 'Alphabetic',
-        },
-        cfg.style
-      );
+        ...cfg.style,
+      };
     }
 
     // 给point注册一个词云的shape

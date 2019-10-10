@@ -23,7 +23,7 @@ class TagSelect extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if ('value' in nextProps && nextProps.value) {
       this.setState({ value: nextProps.value });
     }

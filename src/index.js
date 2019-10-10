@@ -3,7 +3,7 @@
 /* eslint-disable */
 import dva from 'dva';
 
-import createHistory from 'history/createHashHistory';
+import { createHashHistory } from 'history';
 // user BrowserHistory
 // import createHistory from 'history/createBrowserHistory';
 import createLoading from 'dva-loading';
@@ -13,7 +13,7 @@ import createLoading from 'dva-loading';
 import './index.less';
 // 1. Initialize
 const app = dva({
-  history: createHistory(),
+  history: createHashHistory(),
 });
 
 // 2. Plugins

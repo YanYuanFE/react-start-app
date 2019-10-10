@@ -1,9 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Layout, Icon, message } from 'antd';
 import DocumentTitle from 'react-document-title';
-import { connect } from 'dva';
-import { Route, Redirect, Switch, routerRedux } from 'dva/router';
+import { connect, router } from 'dva';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
 import pathToRegexp from 'path-to-regexp';
@@ -18,6 +17,7 @@ import logo from '../assets/logo.svg';
 
 const { Content, Footer } = Layout;
 const { AuthorizedRoute, check } = Authorized;
+const { Route, Redirect, Switch, routerRedux } = router;
 
 /**
  * 根据菜单取得重定向地址.
@@ -54,7 +54,7 @@ const getBreadcrumbNameMap = (menuData, routerData) => {
       Object.assign(childResult, getBreadcrumbNameMap(i.children, routerData));
     }
   }
-  return Object.assign({}, routerData, result, childResult);
+  return { ...routerData, ...result, ...childResult};
 };
 
 const query = {
@@ -257,9 +257,9 @@ class MenuLayout extends React.PureComponent {
               },
             ]}
             copyright={
-              <Fragment>
+              <>
                 Copyright <Icon type="copyright" /> 2018 蚂蚁金服体验技术部出品
-              </Fragment>
+              </>
             }
           />
         </Footer>

@@ -24,7 +24,7 @@ export default class Pie extends Component {
     window.addEventListener('resize', this.resize);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { data } = this.props;
     if (data !== nextProps.data) {
       // because of charts data create when rendered
