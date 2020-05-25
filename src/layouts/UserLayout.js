@@ -1,7 +1,7 @@
 import React from 'react';
 import { router } from 'dva';
 import DocumentTitle from 'react-document-title';
-import { Icon } from 'antd';
+import {CopyrightOutlined} from "@ant-design/icons";
 import GlobalFooter from '../components/GlobalFooter';
 import styles from './UserLayout.less';
 import logo from '../assets/logo.svg';
@@ -29,7 +29,7 @@ const links = [
 
 const copyright = (
   <>
-    Copyright <Icon type="copyright" /> 2018 蚂蚁金服体验技术部出品
+    Copyright <CopyrightOutlined /> 2018 蚂蚁金服体验技术部出品
   </>
 );
 

@@ -1,6 +1,6 @@
 import React, { createElement } from 'react';
 import { Spin } from 'antd';
-import pathToRegexp from 'path-to-regexp';
+import {pathToRegexp} from 'path-to-regexp';
 import Loadable from 'react-loadable';
 import { getMenuData } from './menu';
 

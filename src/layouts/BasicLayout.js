@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { Layout, Icon, message } from 'antd';
+import { Layout, message } from 'antd';
+import {CopyrightOutlined, GithubOutlined} from "@ant-design/icons";
 import DocumentTitle from 'react-document-title';
-import { connect, router } from 'dva';
+import { connect, router, routerRedux } from 'dva';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
-import pathToRegexp from 'path-to-regexp';
+import {pathToRegexp} from 'path-to-regexp';
 import { enquireScreen, unenquireScreen } from 'enquire-js';
 import GlobalHeader from '../components/GlobalHeader';
 import GlobalFooter from '../components/GlobalFooter';
@@ -18,7 +19,7 @@ import logo from '../assets/logo.svg';
 
 const { Content, Header, Footer } = Layout;
 const { AuthorizedRoute, check } = Authorized;
-const { Route, Redirect, Switch, routerRedux } = router;
+const { Route, Redirect, Switch } = router;
 
 /**
  * 根据菜单取得重定向地址.
@@ -262,7 +263,7 @@ class BasicLayout extends PureComponent {
                 },
                 {
                   key: 'github',
-                  title: <Icon type="github" />,
+                  title: <GithubOutlined />,
                   href: 'https://github.com/ant-design/ant-design-pro',
                   blankTarget: true,
                 },
@@ -275,7 +276,7 @@ class BasicLayout extends PureComponent {
               ]}
               copyright={
                 <>
-                  Copyright <Icon type="copyright" /> 2018 蚂蚁金服体验技术部出品
+                  Copyright <CopyrightOutlined /> 2018 蚂蚁金服体验技术部出品
                 </>
               }
             />

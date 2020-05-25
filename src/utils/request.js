@@ -1,8 +1,6 @@
 import { notification } from 'antd';
-import { router, fetch } from 'dva';
+import { routerRedux, fetch } from 'dva';
 import store from '../index';
-
-const { routerRedux }  = router;
 
 const codeMessage = {
   200: '服务器成功返回请求的数据。',

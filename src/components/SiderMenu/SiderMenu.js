@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
-import { Layout, Menu, Icon } from 'antd';
-import pathToRegexp from 'path-to-regexp';
+import { Layout, Menu } from 'antd';
+import {pathToRegexp} from 'path-to-regexp';
 import { router } from 'dva';
 import styles from './index.less';
 import { urlToList } from '../_utils/pathTools';
@@ -18,7 +18,7 @@ const getIcon = icon => {
     return <img src={icon} alt="icon" className={`${styles.icon} sider-menu-item-img`} />;
   }
   if (typeof icon === 'string') {
-    return <Icon type={icon} />;
+    // return <Icon type={icon} />;
   }
   return icon;
 };
@@ -42,12 +42,15 @@ export const getFlatMenuKeys = menu =>
  * @param  flatMenuKeys: [/abc, /abc/:id, /abc/:id/info]
  * @param  paths: [/abc, /abc/11, /abc/11/info]
  */
-export const getMenuMatchKeys = (flatMenuKeys, paths) =>
-  paths.reduce(
+export const getMenuMatchKeys = (flatMenuKeys, paths) => {
+  return paths.reduce(
     (matchKeys, path) =>
-      matchKeys.concat(flatMenuKeys.filter(item => pathToRegexp(item).test(path))),
+      matchKeys.concat(flatMenuKeys.filter(item => {
+        return pathToRegexp(item).test(path);
+      })),
     []
-  );
+  )
+};
 
 export default class SiderMenu extends PureComponent {
   constructor(props) {
@@ -129,16 +132,8 @@ export default class SiderMenu extends PureComponent {
       if (childrenItems && childrenItems.length > 0) {
         return (
           <SubMenu
-            title={
-              item.icon ? (
-                <span>
-                  {getIcon(item.icon)}
-                  <span>{item.name}</span>
-                </span>
-              ) : (
-                item.name
-              )
-            }
+            icon={getIcon(item.icon)}
+            title={item.name}
             key={item.path}
           >
             {childrenItems}

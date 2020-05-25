@@ -1,9 +1,7 @@
-import { router } from 'dva';
+import { routerRedux } from 'dva';
 import { fakeAccountLogin } from '../services/api';
 import { setAuthority } from '../utils/authority';
 import { reloadAuthorized } from '../utils/Authorized';
-
-const { routerRedux } = router;
 
 export default {
   namespace: 'login',

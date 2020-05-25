@@ -1,12 +1,14 @@
 import React, { PureComponent } from 'react';
 import moment from 'moment';
-import { Link } from 'dva/router';
 import { Row, Col, Card, List, Avatar } from 'antd';
+import {router} from "dva";
 
 import EditableLinkGroup from 'components/EditableLinkGroup';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
-
 import styles from './Workplace.less';
+
+const { Link } = router;
+
 
 const links = [
   {

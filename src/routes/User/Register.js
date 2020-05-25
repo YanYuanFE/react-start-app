@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { connect } from 'dva';
-import { routerRedux, Link } from 'dva/router';
+import {connect, router, routerRedux} from 'dva';
 import { Form, Input, Button, Select, Row, Col, Popover, Progress } from 'antd';
 import styles from './Register.less';
 
 const FormItem = Form.Item;
 const { Option } = Select;
 const InputGroup = Input.Group;
+const { Link } = router;
 
 const passwordStatusMap = {
   ok: <div className={styles.success}>强度：强</div>,

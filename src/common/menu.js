@@ -1,8 +1,10 @@
+import React from 'react';
+import {DashboardOutlined, WarningOutlined, UserOutlined} from "@ant-design/icons";
 import { isUrl } from '../utils/utils';
 
 const menuData = [{
   name: 'dashboard',
-  icon: 'dashboard',
+  icon: <DashboardOutlined />,
   path: 'dashboard',
   children: [{
     name: '分析页',
@@ -17,7 +19,7 @@ const menuData = [{
   }],
 }, {
   name: '异常页',
-  icon: 'warning',
+  icon: <WarningOutlined />,
   path: 'exception',
   children: [{
     name: '403',
@@ -35,7 +37,7 @@ const menuData = [{
   }],
 }, {
   name: '账户',
-  icon: 'user',
+  icon: <UserOutlined />,
   path: 'user',
   authority: 'guest',
   children: [{
@@ -48,12 +50,14 @@ const menuData = [{
     name: '注册结果',
     path: 'register-result',
   }],
-}, {
-  name: '使用文档',
-  icon: 'book',
-  path: 'http://pro.ant.design/docs/getting-started',
-  target: '_blank',
 }];
+
+// {
+//   name: '使用文档',
+//     icon: <BookOutlined />,
+//   path: 'http://pro.ant.design/docs/getting-started',
+//   target: '_blank',
+// }
 
 function formatter(data, parentPath = '/', parentAuthority) {
   return data.map((item) => {

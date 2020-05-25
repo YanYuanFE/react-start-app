@@ -1,4 +1,5 @@
 import React, { PureComponent, createElement } from 'react';
+import { PlusOutlined } from '@ant-design/icons';
 import PropTypes from 'prop-types';
 import { Button } from 'antd';
 import styles from './index.less';
@@ -9,7 +10,7 @@ class EditableLinkGroup extends PureComponent {
   static propTypes = {
     links: PropTypes.array,
     onAdd: PropTypes.func,
-    linkElement: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    linkElement: PropTypes.any,
   };
 
   static defaultProps = {
@@ -20,6 +21,7 @@ class EditableLinkGroup extends PureComponent {
 
   render() {
     const { links, linkElement, onAdd } = this.props;
+    console.log(linkElement)
     return (
       <div className={styles.linkGroup}>
         {links.map(link =>
@@ -34,7 +36,7 @@ class EditableLinkGroup extends PureComponent {
           )
         )}
         {
-          <Button size="small" type="primary" ghost onClick={onAdd} icon="plus">
+          <Button size="small" type="primary" ghost onClick={onAdd} icon={<PlusOutlined />}>
             添加
           </Button>
         }

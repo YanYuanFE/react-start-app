@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
-import { Menu, Icon, Spin, Tag, Dropdown, Avatar, Divider, Tooltip } from 'antd';
+import { Menu, Spin, Tag, Dropdown, Avatar, Divider, Tooltip } from 'antd';
+import { QuestionCircleOutlined, MenuUnfoldOutlined, MenuFoldOutlined, UserOutlined, SettingOutlined, CloseCircleOutlined, LogoutOutlined } from '@ant-design/icons';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
 import Debounce from 'lodash-decorators/debounce';
@@ -73,17 +74,17 @@ export default class GlobalHeader extends PureComponent {
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
         <Menu.Item disabled>
-          <Icon type="user" />个人中心
+          <UserOutlined />个人中心
         </Menu.Item>
         <Menu.Item disabled>
-          <Icon type="setting" />设置
+          <SettingOutlined />设置
         </Menu.Item>
         <Menu.Item key="triggerError">
-          <Icon type="close-circle" />触发报错
+          <CloseCircleOutlined />触发报错
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item key="logout">
-          <Icon type="logout" />退出登录
+          <LogoutOutlined />退出登录
         </Menu.Item>
       </Menu>
     );
@@ -96,21 +97,36 @@ export default class GlobalHeader extends PureComponent {
           </Link>,
           <Divider type="vertical" key="line" />,
         ]}
-        <Icon
-          className={styles.trigger}
-          type={collapsed ? 'menu-unfold' : 'menu-fold'}
-          onClick={this.toggle}
-        />
+        {
+          collapsed ? <MenuUnfoldOutlined className={styles.trigger} onClick={this.toggle}/> : <MenuFoldOutlined className={styles.trigger} onClick={this.toggle}/>
+        }
         <div className={styles.right}>
           <HeaderSearch
             className={`${styles.action} ${styles.search}`}
             placeholder="站内搜索"
-            dataSource={['搜索提示一', '搜索提示二', '搜索提示三']}
+            defaultValue="umi ui"
+            options={
+              [
+                {
+                  label: <a href="https://umijs.org/zh/guide/umi-ui.html">umi ui</a>,
+                  value: 'umi ui',
+                },
+                {
+                  label: <a href="next.ant.design">Ant Design</a>,
+                  value: 'Ant Design',
+                },
+                {
+                  label: <a href="https://protable.ant.design/">Pro Table</a>,
+                  value: 'Pro Table',
+                },
+                {
+                  label: <a href="https://prolayout.ant.design/">Pro Layout</a>,
+                  value: 'Pro Layout',
+                },
+              ]
+            }
             onSearch={value => {
               console.log('input', value); // eslint-disable-line
-            }}
-            onPressEnter={value => {
-              console.log('enter', value); // eslint-disable-line
             }}
           />
           <Tooltip title="使用文档">
@@ -120,7 +136,7 @@ export default class GlobalHeader extends PureComponent {
               rel="noopener noreferrer"
               className={styles.action}
             >
-              <Icon type="question-circle-o" />
+              <QuestionCircleOutlined />
             </a>
           </Tooltip>
           <NoticeIcon

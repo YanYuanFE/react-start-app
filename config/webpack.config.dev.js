@@ -101,9 +101,11 @@ const mergedConfig = merge(common, {
           {
             loader: 'less-loader',
             options: {
-              strictMath: false,
-              noIeCompat: true,
-              javascriptEnabled: true,
+              lessOptions: {
+                strictMath: false,
+                noIeCompat: true,
+                javascriptEnabled: true,
+              }
             },
           },
         ],
@@ -148,10 +150,12 @@ const mergedConfig = merge(common, {
         {
           loader: 'less-loader',
           options: {
-            // strictMath: false,
-            // noIeCompat: true,
-            javascriptEnabled: true,
-            modifyVars: theme,
+            lessOptions: {
+              // strictMath: false,
+              // noIeCompat: true,
+              javascriptEnabled: true,
+              modifyVars: theme,
+            }
           },
         },
       ],

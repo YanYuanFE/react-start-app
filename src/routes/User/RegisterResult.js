@@ -1,8 +1,10 @@
 import React from 'react';
 import { Button } from 'antd';
-import { Link } from 'dva/router';
+import { router } from 'dva';
 import Result from 'components/Result';
 import styles from './RegisterResult.less';
+
+const { Link } = router;
 
 const actions = (
   <div className={styles.actions}>

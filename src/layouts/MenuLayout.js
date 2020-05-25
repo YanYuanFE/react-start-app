@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Layout, Icon, message } from 'antd';
 import DocumentTitle from 'react-document-title';
-import { connect, router } from 'dva';
+import { connect, router, routerRedux } from 'dva';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
 import pathToRegexp from 'path-to-regexp';
@@ -17,7 +17,7 @@ import logo from '../assets/logo.svg';
 
 const { Content, Footer } = Layout;
 const { AuthorizedRoute, check } = Authorized;
-const { Route, Redirect, Switch, routerRedux } = router;
+const { Route, Redirect, Switch } = router;
 
 /**
  * 根据菜单取得重定向地址.

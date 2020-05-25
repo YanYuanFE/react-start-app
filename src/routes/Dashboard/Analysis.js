@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
   Row,
   Col,
-  Icon,
   Card,
   Tabs,
   Radio,
@@ -10,6 +9,8 @@ import {
   Menu,
   Dropdown,
 } from 'antd';
+import { EllipsisOutlined } from '@ant-design/icons';
+
 
 import styles from './Analysis.less';
 
@@ -61,7 +62,7 @@ export default class Analysis extends Component {
     const iconGroup = (
       <span className={styles.iconGroup}>
         <Dropdown overlay={menu} placement="bottomRight">
-          <Icon type="ellipsis" />
+          <EllipsisOutlined />
         </Dropdown>
       </span>
     );
