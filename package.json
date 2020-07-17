@@ -23,7 +23,7 @@
     "dva": "^2.6.0-beta.14",
     "dva-loading": "^3.0.20",
     "enquire-js": "^0.2.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "lodash-decorators": "^6.0.1",
     "moment": "^2.26.0",
     "omit.js": "^1.0.2",
