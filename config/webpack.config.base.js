@@ -1,4 +1,5 @@
 const path = require('path');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir);
@@ -37,12 +38,6 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        include: /src/,
-        enforce: 'pre',
-        use: 'eslint-loader',
-      },
-      {
-        test: /\.js$/,
         exclude: /node_modules/,
         use: 'happypack/loader?id=jsx',
         // use: [
@@ -77,4 +72,10 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new ESLintPlugin({
+      fix: true,
+      lintDirtyModulesOnly: true,
+    })
+  ]
 };
