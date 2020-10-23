@@ -1,5 +1,5 @@
 const path = require('path');
-const merge = require('webpack-merge');
+const {merge} = require('webpack-merge');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const HappyPack = require('happypack');
@@ -22,7 +22,7 @@ const theme = getThemeConfig();
 
 const mergedConfig = merge(common, {
   mode: 'development',
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'inline-cheap-module-source-map',
   performance: {
     hints: false,
   },
@@ -114,7 +114,6 @@ const mergedConfig = merge(common, {
   },
   plugins: [
     // new DashboardPlugin(dashboard.setData),
-    new webpack.NamedModulesPlugin(),  // 开启 HMR时该插件会显示模块的相对路径
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: resolve('index.html'),
