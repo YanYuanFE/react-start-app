@@ -1,11 +1,26 @@
 {
-  "presets":["@babel/react", "@babel/env"],
+  "presets":["@babel/react", [
+    "@babel/preset-env",
+    {
+      "modules": false
+    }
+  ]
+  ],
   "plugins": [
     "dva-hmr",
     ["@babel/plugin-proposal-decorators", { "legacy": true }],
     "@babel/plugin-syntax-dynamic-import",
     ["@babel/plugin-proposal-class-properties", { "loose": true }],
-    "@babel/plugin-transform-runtime",
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "corejs": {
+          "version": 3,
+          "proposals": true
+        },
+        "useESModules": true
+      }
+    ],
     [
       "import", {
         "libraryName": "antd",
