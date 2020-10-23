@@ -2,6 +2,7 @@ const path = require('path');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const HappyPack = require('happypack');
 const os = require('os');
+const webpack = require('webpack');
 
 const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
@@ -13,17 +14,20 @@ module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
     app: './src/index.js',
-    vendor: ['react', 'react-dom'],
   },
   output: {
     filename: 'js/[name].[hash].js',
     path: path.resolve(__dirname, '../dist'),
     chunkFilename: 'js/[name].bundle.js',
   },
+  optimization: {
+    chunkIds: 'named',
+  },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
     modules: ['node_modules', path.resolve(__dirname, 'src')],
     alias: {
+      lodash$: "lodash-es",
       src: resolve('src'),
       assets: resolve('assets'),
       models: resolve('src/models'),
@@ -92,5 +96,9 @@ module.exports = {
       threadPool: happyThreadPool,
       verbose: true,
     }),
+    new webpack.ContextReplacementPlugin(
+      /moment[/\\]locale$/,
+      /zh-cn/,
+    ),
   ]
 };

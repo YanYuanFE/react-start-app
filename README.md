@@ -2,7 +2,7 @@
 
 ### 基于 Ant Design 的 React 脚手架，开箱即用
 
-> A React start project
+> An scaffold for React Web Applications
 
 
 ## 技术栈

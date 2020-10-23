@@ -1,10 +1,11 @@
 const webpack = require('webpack');
 const path = require('path');
-const {merge} = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
 const common = require('./webpack.config.base');
 const getThemeConfig = require('../theme.js');
@@ -13,6 +14,12 @@ const theme = getThemeConfig();
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir);
+}
+
+const vendorGroups = {
+  polyfill: /babel|core-js/,
+  core: /react|redux|router|history|axios/,
+  utils: /moment|lodash/,
 }
 
 module.exports = merge(common, {
@@ -26,12 +33,23 @@ module.exports = merge(common, {
       name: 'manifest',
     },
     splitChunks: {
+      chunks: "all",
+      maxAsyncRequests: Infinity,
+      maxInitialRequests: Infinity,
       cacheGroups: {
-        styles: {
-          name: 'styles',
-          test: /\.css$/,
-          chunks: 'all',
-          enforce: true,
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name(module) {
+            let packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1].replace("@", "");
+
+            for (const groupKey in vendorGroups) {
+              if (vendorGroups[groupKey].test(packageName)) {
+                packageName = groupKey;
+                break;
+              }
+            }
+            return `vendor~${packageName}`;
+          },
         },
       },
     },
@@ -148,6 +166,7 @@ module.exports = merge(common, {
     new MiniCssExtractPlugin({
       filename: 'css/[name].[hash].css',
       chunkFilename: 'css/[id].[hash].css',
-    })
+    }),
+    new BundleAnalyzerPlugin(),
   ],
 });
