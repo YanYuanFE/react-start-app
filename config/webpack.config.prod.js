@@ -2,8 +2,8 @@ const webpack = require('webpack');
 const path = require('path');
 const {merge} = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const {CleanWebpackPlugin} = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const common = require('./webpack.config.base');
@@ -27,11 +27,6 @@ module.exports = merge(common, {
     },
     splitChunks: {
       cacheGroups: {
-        commons: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendor',
-          chunks: 'all',
-        },
         styles: {
           name: 'styles',
           test: /\.css$/,
@@ -40,14 +35,13 @@ module.exports = merge(common, {
         },
       },
     },
+    minimize: true,
     minimizer: [
-      new UglifyJsPlugin({
+      new TerserPlugin({
         test: /\.js($|\?)/i,
         include: /\/src/,
-        sourceMap: true,
         parallel: true,
-        cache: true,
-        uglifyOptions: {
+        terserOptions: {
           ie8: false,
           ecma: 8,
         },
@@ -82,10 +76,12 @@ module.exports = merge(common, {
           {
             loader: 'less-loader',
             options: {
-              strictMath: false,
-              noIeCompat: true,
-              javascriptEnabled: true,
-              modifyVars: theme,
+              lessOptions: {
+                strictMath: false,
+                noIeCompat: true,
+                javascriptEnabled: true,
+                modifyVars: theme,
+              }
             },
           },
         ],
@@ -109,9 +105,12 @@ module.exports = merge(common, {
           {
             loader: 'less-loader',
             options: {
-              strictMath: false,
-              noIeCompat: true,
-              javascriptEnabled: true,
+              lessOptions: {
+                strictMath: false,
+                noIeCompat: true,
+                javascriptEnabled: true,
+                modifyVars: theme,
+              }
             },
           },
         ],
@@ -128,8 +127,7 @@ module.exports = merge(common, {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(path.resolve(__dirname, '../dist'), {
-      root: path.resolve(__dirname, '../'),    // 设置root
+    new CleanWebpackPlugin({
       verbose: true,
     }),
     new HtmlWebpackPlugin({
@@ -150,7 +148,6 @@ module.exports = merge(common, {
     new MiniCssExtractPlugin({
       filename: 'css/[name].[hash].css',
       chunkFilename: 'css/[id].[hash].css',
-    }),
-    new webpack.HashedModuleIdsPlugin(), // 根据模块的相对路径生成一个四位数的hash作为模块id, 建议用于生产环境
+    })
   ],
 });

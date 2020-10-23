@@ -1,5 +1,9 @@
 const path = require('path');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const HappyPack = require('happypack');
+const os = require('os');
+
+const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir);
@@ -76,6 +80,17 @@ module.exports = {
     new ESLintPlugin({
       fix: true,
       lintDirtyModulesOnly: true,
-    })
+    }),
+    new HappyPack({
+      id: 'jsx',
+      loaders: [{
+        loader: 'babel-loader',
+        options: {
+          cacheDirectory: true,
+        },
+      }],
+      threadPool: happyThreadPool,
+      verbose: true,
+    }),
   ]
 };

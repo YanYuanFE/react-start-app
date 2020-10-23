@@ -121,17 +121,6 @@ const mergedConfig = merge(common, {
       favicon: resolve('favicon.ico'),
     }),
     new HappyPack({
-      id: 'jsx',
-      loaders: [{
-        loader: 'babel-loader',
-        options: {
-            cacheDirectory: true,
-        },
-      }],
-      threadPool: happyThreadPool,
-      verbose: true,
-    }),
-    new HappyPack({
       id: 'styles',
       loaders: [
         {
