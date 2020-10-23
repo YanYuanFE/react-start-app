@@ -7,17 +7,17 @@
 
 ## 技术栈
 
-*  React16
-*  Ant Design and Ant Pro
+*  React 17
+*  Ant Design 4.x and Ant Pro
 *  dva
-*  Webpack 4.x
+*  Webpack 5.x
 
 ## 特性
 *  :gem: 基于 React，Ant Design，dva 等企业级后台管理系统最佳实践。
 *  :art: 基于 Ant Design 设计语言和 Ant Pro UI 组件库，提供后台管理系统常见使用场景。
 *  :nail_care: 基于 CSS Module 的样式解决方案。
 *  :airplane: 基于 dva 动态加载 Model 和路由，按需加载。
-*  :rocket: 基于 webpack4.x 本地调试和构建。
+*  :rocket: 基于 webpack5.x 本地调试和构建。
 *  :iphone: 响应式设计。
 *  :triangular_ruler: Eslint && husky 统一代码规范。
 
