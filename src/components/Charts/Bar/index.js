@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Chart, Axis, Tooltip, Geom } from 'bizcharts';
-import Debounce from 'lodash-decorators/debounce';
-import Bind from 'lodash-decorators/bind';
+// import Debounce from 'lodash-decorators/debounce';
+// import Bind from 'lodash-decorators/bind';
 import autoHeight from '../autoHeight';
 import styles from '../index.less';
 
@@ -27,8 +27,8 @@ class Bar extends Component {
     this.node = n;
   };
 
-  @Bind()
-  @Debounce(400)
+  // @Bind()
+  // @Debounce(400)
   resize() {
     if (!this.node) {
       return;

@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react';
 import { Menu, Spin, Tag, Dropdown, Avatar, Divider, Tooltip } from 'antd';
 import { QuestionCircleOutlined, MenuUnfoldOutlined, MenuFoldOutlined, UserOutlined, SettingOutlined, CloseCircleOutlined, LogoutOutlined } from '@ant-design/icons';
 import moment from 'moment';
-import groupBy from 'lodash/groupBy';
-import Debounce from 'lodash-decorators/debounce';
+import {groupBy} from 'lodash';
+// import Debounce from 'lodash-decorators/debounce';
 import { router } from 'dva';
 import NoticeIcon from '../NoticeIcon';
 import HeaderSearch from '../HeaderSearch';
@@ -54,7 +54,7 @@ export default class GlobalHeader extends PureComponent {
     this.triggerResizeEvent();
   };
   /* eslint-disable*/
-  @Debounce(600)
+  // @Debounce(600)
   triggerResizeEvent() {
     const event = document.createEvent('HTMLEvents');
     event.initEvent('resize', true, false);

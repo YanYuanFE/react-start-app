@@ -4,8 +4,8 @@ import { DataView } from '@antv/data-set';
 import { Divider } from 'antd';
 import classNames from 'classnames';
 import ReactFitText from 'react-fittext';
-import Debounce from 'lodash-decorators/debounce';
-import Bind from 'lodash-decorators/bind';
+// import Debounce from 'lodash-decorators/debounce';
+// import Bind from 'lodash-decorators/bind';
 import autoHeight from '../autoHeight';
 
 import styles from './index.less';
@@ -92,8 +92,8 @@ export default class Pie extends Component {
   };
 
   // for window resize auto responsive legend
-  @Bind()
-  @Debounce(300)
+  // @Bind()
+  // @Debounce(300)
   resize() {
     const { hasLegend } = this.props;
     if (!hasLegend || !this.root) {

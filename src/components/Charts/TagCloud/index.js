@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Chart, Geom, Coord, Shape } from 'bizcharts';
 import DataSet from '@antv/data-set';
-import Debounce from 'lodash-decorators/debounce';
-import Bind from 'lodash-decorators/bind';
+// import Debounce from 'lodash-decorators/debounce';
+// import Bind from 'lodash-decorators/bind';
 import classNames from 'classnames';
 import autoHeight from '../autoHeight';
 import styles from './index.less';
@@ -47,7 +47,7 @@ class TagCloud extends Component {
   initTagCloud = () => {
     function getTextAttrs(cfg) {
       return {
-        
+
         fillOpacity: cfg.opacity,
           fontSize: cfg.origin._origin.size,
           rotate: cfg.origin._origin.rotate,
@@ -74,8 +74,8 @@ class TagCloud extends Component {
     });
   };
 
-  @Bind()
-  @Debounce(500)
+  // @Bind()
+  // @Debounce(500)
   renderChart(nextProps) {
     // const colors = ['#1890FF', '#41D9C7', '#2FC25B', '#FACC14', '#9AE65C'];
     const { data, height } = nextProps || this.props;
