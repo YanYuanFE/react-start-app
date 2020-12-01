@@ -2,7 +2,7 @@ const path = require('path');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const HappyPack = require('happypack');
 const os = require('os');
-const webpack = require('webpack');
+const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 
 const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
@@ -96,9 +96,6 @@ module.exports = {
       threadPool: happyThreadPool,
       verbose: true,
     }),
-    new webpack.ContextReplacementPlugin(
-      /moment[/\\]locale$/,
-      /zh-cn/,
-    ),
+    new AntdDayjsWebpackPlugin(),
   ]
 };

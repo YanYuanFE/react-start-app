@@ -5,6 +5,7 @@ import { createHashHistory } from 'history';
 // import createHistory from 'history/createBrowserHistory';
 import createLoading from 'dva-loading';
 import createLogger from 'dva-logger';
+import 'dayjs/locale/zh-cn'
 
 import './index.less';
 // 1. Initialize

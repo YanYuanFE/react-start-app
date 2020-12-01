@@ -8,7 +8,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { BundleStatsWebpackPlugin } = require('bundle-stats-webpack-plugin');
 
-
 const common = require('./webpack.config.base');
 const getThemeConfig = require('../theme.js');
 
@@ -20,8 +19,8 @@ function resolve(dir) {
 
 const vendorGroups = {
   polyfill: /babel|core-js/,
-  core: /react|redux|router|history|axios/,
-  utils: /moment|lodash/,
+  core: /react|redux|router|history|dva/,
+  utils: /dayjs|lodash/,
 }
 
 module.exports = merge(common, {
