@@ -22,7 +22,7 @@ function RouterConfig(api) {
           <Route path="/user" component={UserLayout} />
           <AuthorizedRoute
             path="/"
-            render={props => <BasicLayout {...props} />}
+            render={props => <BasicLayout {...props} routerData={routerData} />}
             authority={['admin', 'user']}
             redirectPath={getQueryPath('/user/login', {
               redirect: window.location.href,

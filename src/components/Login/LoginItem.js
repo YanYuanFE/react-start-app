@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button, Row, Col } from 'antd';
-import omit from 'omit.js';
+import {omit} from 'lodash';
 import styles from './index.less';
 import map from './map';
 
@@ -66,7 +66,7 @@ function generator({ defaultProps, defaultRules, type }) {
         }
         otherProps = restProps || otherProps;
         if (type === 'Captcha') {
-          const inputProps = omit(otherProps, ['onGetCaptcha']);
+          const inputProps = omit(otherProps, "onGetCaptcha");
           return (
             <FormItem>
               <Row gutter={8}>

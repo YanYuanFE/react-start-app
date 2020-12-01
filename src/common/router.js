@@ -1,12 +1,10 @@
-import React, { createElement } from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Spin } from 'antd';
 import {pathToRegexp} from 'path-to-regexp';
-import Loadable from 'react-loadable';
+import dynamic from 'dva/dynamic';
 import { getMenuData } from './menu';
 
-let routerDataCache;
-
-const modelNotExisted = (app, model) =>
+export const modelNotExisted = (app, model) =>
   // eslint-disable-next-line
   !app._models.some(({ namespace }) => {
     return namespace === model.substring(model.lastIndexOf('/') + 1);
@@ -14,46 +12,24 @@ const modelNotExisted = (app, model) =>
 
 // wrapper of dynamic
 const dynamicWrapper = (app, models, component) => {
-  // register models
-  models.forEach(model => {
-    if (modelNotExisted(app, model)) {
-      // eslint-disable-next-line
-      app.model(require(`../models/${model}`).default);
-    }
-  });
+  return dynamic({
+    app,
+    models: () => models.map(model => {
+      return import(`../models/${model}`);
+    }),
+    component,
+  })
+};
 
-  // () => require('module')
-  // transformed by babel-plugin-dynamic-import-node-sync
-  if (component.toString().indexOf('.then(') < 0) {
-    return props => {
-      if (!routerDataCache) {
-        routerDataCache = getRouterData(app);
-      }
-      return createElement(component().default, {
-        ...props,
-        routerData: routerDataCache,
-      });
-    };
-  }
-  // () => import('module')
-  return Loadable({
-    loader: () => {
-      if (!routerDataCache) {
-        routerDataCache = getRouterData(app);
-      }
-      return component().then(raw => {
-        const Component = raw.default || raw;
-        return props =>
-          createElement(Component, {
-            ...props,
-            routerData: routerDataCache,
-          });
-      });
-    },
-    loading: () => {
-      return <Spin size="large" className="global-spin" />;
-    },
-  });
+export const load = (factory) => {
+  const Comp = lazy(factory);
+
+  const Dynamic = (props) => (
+    <Suspense fallback={<Spin size="large" className="global-spin" />}>
+      <Comp {...props} />
+    </Suspense>
+  );
+  return Dynamic;
 };
 
 function getFlatMenuData(menus) {

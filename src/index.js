@@ -4,8 +4,8 @@ import { createHashHistory } from 'history';
 // user BrowserHistory
 // import createHistory from 'history/createBrowserHistory';
 import createLoading from 'dva-loading';
-import createLogger from 'dva-logger';
-import 'dayjs/locale/zh-cn'
+import {createLogger} from 'redux-logger';
+import 'dayjs/locale/zh-cn';
 
 import './index.less';
 // 1. Initialize
@@ -15,7 +15,9 @@ const app = dva({
 
 // 2. Plugins
 app.use(createLoading());
-app.use(createLogger());
+app.use({
+  onAction: createLogger(),
+});
 
 // 3. Register global model
 app.model(require('./models/global').default);

@@ -91,6 +91,7 @@ module.exports = {
         loader: 'babel-loader',
         options: {
           cacheDirectory: true,
+          plugins: [require.resolve('react-refresh/babel')],
         },
       }],
       threadPool: happyThreadPool,

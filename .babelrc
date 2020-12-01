@@ -7,7 +7,6 @@
   ]
   ],
   "plugins": [
-    "dva-hmr",
     ["@babel/plugin-proposal-decorators", { "legacy": true }],
     "@babel/plugin-syntax-dynamic-import",
     ["@babel/plugin-proposal-class-properties", { "loose": true }],
@@ -27,6 +26,5 @@
         "style": true
       }
     ]
-//    ["import", { "libraryName": "lodash", "libraryDirectory": "",  "camel2DashComponentName": false}, "lodash"]
   ]
 }

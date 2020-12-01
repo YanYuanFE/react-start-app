@@ -2,6 +2,7 @@
   "parser": "babel-eslint",
   "extends": [
     "airbnb",
+    "airbnb/hooks",
     "prettier"
   ],
   "env": {

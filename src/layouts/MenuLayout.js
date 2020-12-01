@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 import { Layout, Icon, message } from 'antd';
 import DocumentTitle from 'react-document-title';
 import { connect, router, routerRedux } from 'dva';
-import { ContainerQuery } from 'react-container-query';
-import classNames from 'classnames';
 import pathToRegexp from 'path-to-regexp';
-import { enquireScreen, unenquireScreen } from 'enquire-js';
 import GlobalFooter from '../components/GlobalFooter';
 import HeaderMenu from '../components/HeaderMenu';
 import NotFound from '../routes/Exception/404';
@@ -57,32 +54,6 @@ const getBreadcrumbNameMap = (menuData, routerData) => {
   return { ...routerData, ...result, ...childResult};
 };
 
-const query = {
-  'screen-xs': {
-    maxWidth: 575,
-  },
-  'screen-sm': {
-    minWidth: 576,
-    maxWidth: 767,
-  },
-  'screen-md': {
-    minWidth: 768,
-    maxWidth: 991,
-  },
-  'screen-lg': {
-    minWidth: 992,
-    maxWidth: 1199,
-  },
-  'screen-xl': {
-    minWidth: 1200,
-  },
-};
-
-let isMobile;
-enquireScreen(b => {
-  isMobile = b;
-});
-
 class MenuLayout extends React.PureComponent {
   static childContextTypes = {
     location: PropTypes.object,
@@ -90,7 +61,7 @@ class MenuLayout extends React.PureComponent {
   };
 
   state = {
-    isMobile,
+    isMobile: false,
   };
 
   getChildContext() {
@@ -99,18 +70,6 @@ class MenuLayout extends React.PureComponent {
       location,
       breadcrumbNameMap: getBreadcrumbNameMap(getMenuData(), routerData),
     };
-  }
-
-  componentDidMount() {
-    this.enquireHandler = enquireScreen(mobile => {
-      this.setState({
-        isMobile: mobile,
-      });
-    });
-  }
-
-  componentWillUnmount() {
-    unenquireScreen(this.enquireHandler);
   }
 
   getPageTitle() {
@@ -268,9 +227,7 @@ class MenuLayout extends React.PureComponent {
 
     return (
       <DocumentTitle title={this.getPageTitle()}>
-        <ContainerQuery query={query}>
-          {params => <div className={classNames(params)}>{layout}</div>}
-        </ContainerQuery>
+        {layout}
       </DocumentTitle>
     );
   }
