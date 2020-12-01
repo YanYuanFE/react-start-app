@@ -1,103 +1,87 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, {useEffect, useRef, useState} from 'react';
 import { Form, Button, Row, Col } from 'antd';
 import {omit} from 'lodash';
 import styles from './index.less';
 import map from './map';
+import {useLoginContext} from "./index";
 
 const FormItem = Form.Item;
 
 function generator({ defaultProps, defaultRules, type }) {
   return WrappedComponent => {
-    return class BasicComponent extends Component {
-      static contextTypes = {
-        form: PropTypes.object,
-        updateActive: PropTypes.func,
-      };
+    const BasicComponent = (props) => {
+      const { updateActive } = useLoginContext();
+      const { onChange, defaultValue, rules, name, onGetCaptcha, ...restProps } = props;
+      const intervalRef = useRef();
+      // static contextTypes = {
+      //   form: PropTypes.object,
+      //   updateActive: PropTypes.func,
+      // };
+      const [count, setCount] = useState(0);
 
-      constructor(props) {
-        super(props);
-        this.state = {
-          count: 0,
-        };
-      }
-
-      componentDidMount() {
-        const { updateActive } = this.context;
-        const { name } = this.props;
+      useEffect(() => {
         if (updateActive) {
           updateActive(name);
         }
-      }
+        return () => {
+          clearInterval(intervalRef.current);
+        }
+      }, [updateActive, name]);
 
-      componentWillUnmount() {
-        clearInterval(this.interval);
-      }
-
-      onGetCaptcha = () => {
-        let count = 59;
-        this.setState({ count });
-        const { onGetCaptcha } = this.props;
+      const handleOnGetCaptcha = () => {
+        let c = 59;
+        setCount(c);
         if (onGetCaptcha) {
           onGetCaptcha();
         }
-        this.interval = setInterval(() => {
-          count -= 1;
-          this.setState({ count });
+        intervalRef.current = setInterval(() => {
+          c -= 1;
+          setCount(c);
           if (count === 0) {
-            clearInterval(this.interval);
+            clearInterval(intervalRef.current);
           }
         }, 1000);
       };
 
-      render() {
-        const { form } = this.context;
-        const { getFieldDecorator } = form;
-        const options = {};
-        let otherProps = {};
-        const { onChange, defaultValue, rules, name, ...restProps } = this.props;
-        const { count } = this.state;
-        options.rules = rules || defaultRules;
-        if (onChange) {
-          options.onChange = onChange;
-        }
-        if (defaultValue) {
-          options.initialValue = defaultValue;
-        }
-        otherProps = restProps || otherProps;
-        if (type === 'Captcha') {
-          const inputProps = omit(otherProps, "onGetCaptcha");
-          return (
-            <FormItem>
-              <Row gutter={8}>
-                <Col span={16}>
-                  {getFieldDecorator(name, options)(
-                    <WrappedComponent {...defaultProps} {...inputProps} />
-                  )}
-                </Col>
-                <Col span={8}>
-                  <Button
-                    disabled={count}
-                    className={styles.getCaptcha}
-                    size="large"
-                    onClick={this.onGetCaptcha}
-                  >
-                    {count ? `${count} s` : '获取验证码'}
-                  </Button>
-                </Col>
-              </Row>
-            </FormItem>
-          );
-        }
+      const options = {};
+      let otherProps = {};
+      options.rules = rules || defaultRules;
+      if (onChange) {
+        options.onChange = onChange;
+      }
+      if (defaultValue) {
+        options.initialValue = defaultValue;
+      }
+      otherProps = restProps || otherProps;
+      if (type === 'Captcha') {
+        const inputProps = omit(otherProps, "onGetCaptcha");
         return (
-          <FormItem>
-            {getFieldDecorator(name, options)(
-              <WrappedComponent {...defaultProps} {...otherProps} />
-            )}
+          <FormItem name={name} {...options}>
+            <Row gutter={8}>
+              <Col span={16}>
+                <WrappedComponent {...defaultProps} {...inputProps} />
+              </Col>
+              <Col span={8}>
+                <Button
+                  disabled={count}
+                  className={styles.getCaptcha}
+                  size="large"
+                  onClick={handleOnGetCaptcha}
+                >
+                  {count ? `${count} s` : '获取验证码'}
+                </Button>
+              </Col>
+            </Row>
           </FormItem>
         );
       }
+      return (
+        <FormItem name={name} {...options}>
+          <WrappedComponent {...defaultProps} {...otherProps} />
+        </FormItem>
+      );
     };
+    return BasicComponent;
   };
 }
 

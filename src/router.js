@@ -19,7 +19,7 @@ function RouterConfig(api) {
     <ConfigProvider locale={zhCN}>
       <ConnectedRouter history={history}>
         <Switch>
-          <Route path="/user" component={UserLayout} />
+          <Route path="/user" render={props => <UserLayout {...props} routerData={routerData} />} />
           <AuthorizedRoute
             path="/"
             render={props => <BasicLayout {...props} routerData={routerData} />}

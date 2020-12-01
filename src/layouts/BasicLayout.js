@@ -96,6 +96,7 @@ const BasicLayout = ({routerData}) => {
   // }
 
   const getPageTitle = () => {
+    console.log(routerData)
     const { pathname } = location;
     let title = 'Ant Design Pro';
     let currRouterData = null;

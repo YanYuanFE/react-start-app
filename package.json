@@ -11,8 +11,7 @@
   },
   "lint-staged": {
     "src/**/*.js": [
-      "npm run fix",
-      "git add"
+      "npm run fix"
     ]
   },
   "dependencies": {

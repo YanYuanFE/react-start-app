@@ -12,9 +12,9 @@ import styles from './index.less';
 const { Link } = router;
 
 export default class GlobalHeader extends PureComponent {
-  componentWillUnmount() {
-    this.triggerResizeEvent.cancel();
-  }
+  // componentWillUnmount() {
+  //   this.triggerResizeEvent.cancel();
+  // }
 
   getNoticeData() {
     const { notices } = this.props;
@@ -51,15 +51,15 @@ export default class GlobalHeader extends PureComponent {
   toggle = () => {
     const { collapsed, onCollapse } = this.props;
     onCollapse(!collapsed);
-    this.triggerResizeEvent();
+    // this.triggerResizeEvent();
   };
   /* eslint-disable*/
   // @Debounce(600)
-  triggerResizeEvent() {
-    const event = document.createEvent('HTMLEvents');
-    event.initEvent('resize', true, false);
-    window.dispatchEvent(event);
-  }
+  // triggerResizeEvent() {
+  //   const event = document.createEvent('HTMLEvents');
+  //   event.initEvent('resize', true, false);
+  //   window.dispatchEvent(event);
+  // }
   render() {
     const {
       currentUser = {},

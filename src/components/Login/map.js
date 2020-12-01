@@ -1,5 +1,6 @@
 import React from 'react';
-import { Input, Icon } from 'antd';
+import { Input } from 'antd';
+import { UserOutlined, LockOutlined, MobileOutlined, MailOutlined } from "@ant-design/icons";
 import styles from './index.less';
 
 const map = {
@@ -7,7 +8,7 @@ const map = {
     component: Input,
     props: {
       size: 'large',
-      prefix: <Icon type="user" className={styles.prefixIcon} />,
+      prefix: <UserOutlined className={styles.prefixIcon} />,
       placeholder: 'admin',
     },
     rules: [
@@ -21,7 +22,7 @@ const map = {
     component: Input,
     props: {
       size: 'large',
-      prefix: <Icon type="lock" className={styles.prefixIcon} />,
+      prefix: <LockOutlined className={styles.prefixIcon} />,
       type: 'password',
       placeholder: '888888',
     },
@@ -36,7 +37,7 @@ const map = {
     component: Input,
     props: {
       size: 'large',
-      prefix: <Icon type="mobile" className={styles.prefixIcon} />,
+      prefix: <MobileOutlined className={styles.prefixIcon} />,
       placeholder: 'mobile number',
     },
     rules: [
@@ -54,7 +55,7 @@ const map = {
     component: Input,
     props: {
       size: 'large',
-      prefix: <Icon type="mail" className={styles.prefixIcon} />,
+      prefix: <MailOutlined className={styles.prefixIcon} />,
       placeholder: 'captcha',
     },
     rules: [

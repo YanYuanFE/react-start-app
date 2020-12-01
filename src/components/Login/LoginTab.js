@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, {useEffect} from 'react';
 import { Tabs } from 'antd';
+import {useLoginContext} from "./index";
 
 const { TabPane } = Tabs;
 
@@ -12,26 +12,19 @@ const generateId = (() => {
   };
 })();
 
-export default class LoginTab extends Component {
-  static __ANT_PRO_LOGIN_TAB = true;
+const LoginTab = (props) => {
+  const {tabUtil} = useLoginContext();
+  const uniqueId = generateId('login-tab-');
 
-  static contextTypes = {
-    tabUtil: PropTypes.object,
-  };
-
-  constructor(props) {
-    super(props);
-    this.uniqueId = generateId('login-tab-');
-  }
-
-  UNSAFE_componentWillMount() {
-    const { tabUtil } = this.context;
+  useEffect(()=> {
     if (tabUtil) {
-      tabUtil.addTab(this.uniqueId);
+      tabUtil.addTab(uniqueId);
     }
-  }
+  }, [tabUtil, uniqueId]);
 
-  render() {
-    return <TabPane {...this.props} />;
-  }
+  return <TabPane {...props} />;
 }
+
+LoginTab.ANT_PRO_LOGIN_TAB = true;
+
+export default LoginTab;
