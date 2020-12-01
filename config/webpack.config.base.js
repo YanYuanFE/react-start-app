@@ -3,6 +3,7 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const HappyPack = require('happypack');
 const os = require('os');
 const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
+const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
@@ -98,5 +99,6 @@ module.exports = {
       verbose: true,
     }),
     new AntdDayjsWebpackPlugin(),
+    new ReactRefreshPlugin(),
   ]
 };

@@ -2,7 +2,6 @@ const path = require('path');
 const {merge} = require('webpack-merge');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const HappyPack = require('happypack');
 const os = require('os');
 
@@ -115,7 +114,6 @@ const mergedConfig = merge(common, {
   },
   plugins: [
     // new DashboardPlugin(dashboard.setData),
-    new ReactRefreshPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: resolve('index.html'),
