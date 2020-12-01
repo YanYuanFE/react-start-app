@@ -14,13 +14,13 @@ const generateId = (() => {
 
 const LoginTab = (props) => {
   const {tabUtil} = useLoginContext();
-  const uniqueId = generateId('login-tab-');
 
   useEffect(()=> {
+    const uniqueId = generateId('login-tab-');
     if (tabUtil) {
       tabUtil.addTab(uniqueId);
     }
-  }, [tabUtil, uniqueId]);
+  }, []);
 
   return <TabPane {...props} />;
 }

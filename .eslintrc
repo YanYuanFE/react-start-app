@@ -23,6 +23,8 @@
     "consistent-return": [
       0
     ],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "off",
     "react/forbid-prop-types": [
       0
     ],
