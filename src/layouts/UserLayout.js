@@ -33,9 +33,8 @@ const copyright = (
   </>
 );
 
-class UserLayout extends React.PureComponent {
-  getPageTitle() {
-    const { routerData, location } = this.props;
+const UserLayout = ({ routerData, location, match }) => {
+  const getPageTitle = () => {
     const { pathname } = location;
     let title = 'Ant Design Pro';
     if (routerData[pathname] && routerData[pathname].name) {
@@ -44,38 +43,35 @@ class UserLayout extends React.PureComponent {
     return title;
   }
 
-  render() {
-    const { routerData, match } = this.props;
-    return (
-      <DocumentTitle title={this.getPageTitle()}>
-        <div className={styles.container}>
-          <div className={styles.content}>
-            <div className={styles.top}>
-              <div className={styles.header}>
-                <Link to="/">
-                  <img alt="logo" className={styles.logo} src={logo} />
-                  <span className={styles.title}>Ant Design</span>
-                </Link>
-              </div>
-              <div className={styles.desc}>Ant Design 是西湖区最具影响力的 Web 设计规范</div>
+  return (
+    <DocumentTitle title={getPageTitle()}>
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <div className={styles.top}>
+            <div className={styles.header}>
+              <Link to="/">
+                <img alt="logo" className={styles.logo} src={logo} />
+                <span className={styles.title}>Ant Design</span>
+              </Link>
             </div>
-            <Switch>
-              {getRoutes(match.path, routerData).map(item => (
-                <Route
-                  key={item.key}
-                  path={item.path}
-                  component={item.component}
-                  exact={item.exact}
-                />
-              ))}
-              <Redirect exact from="/user" to="/user/login" />
-            </Switch>
+            <div className={styles.desc}>Ant Design 是西湖区最具影响力的 Web 设计规范</div>
           </div>
-          <GlobalFooter links={links} copyright={copyright} />
+          <Switch>
+            {getRoutes(match.path, routerData).map(item => (
+              <Route
+                key={item.key}
+                path={item.path}
+                component={item.component}
+                exact={item.exact}
+              />
+            ))}
+            <Redirect exact from="/user" to="/user/login" />
+          </Switch>
         </div>
-      </DocumentTitle>
-    );
-  }
+        <GlobalFooter links={links} copyright={copyright} />
+      </div>
+    </DocumentTitle>
+  );
 }
 
 export default UserLayout;

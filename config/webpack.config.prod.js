@@ -1,5 +1,4 @@
 const webpack = require('webpack');
-const path = require('path');
 const { merge } = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -8,14 +7,10 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 // const { BundleStatsWebpackPlugin } = require('bundle-stats-webpack-plugin');
 
-const common = require('./webpack.config.base');
+const {getCommonConfig, resolve} = require('./webpack.config.base');
 const getThemeConfig = require('../theme.js');
 
 const theme = getThemeConfig();
-
-function resolve(dir) {
-  return path.join(__dirname, '..', dir);
-}
 
 const vendorGroups = {
   polyfill: /babel|core-js/,
@@ -23,7 +18,7 @@ const vendorGroups = {
   utils: /dayjs|lodash/,
 }
 
-module.exports = merge(common, {
+module.exports = merge(getCommonConfig(false), {
   mode: 'production',
   devtool: 'source-map',
   performance: {
@@ -115,7 +110,7 @@ module.exports = merge(common, {
             loader: 'css-loader',
             options: {
               modules: {
-                localIdentName: '[local]--[hash:base64:5]',
+                localIdentName: '[local]--[contenthash:base64:5]',
               },
               importLoaders: 2,
             },
@@ -165,8 +160,8 @@ module.exports = merge(common, {
       'process.env.NODE_ENV': JSON.stringify('production'),
     }),
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[hash].css',
-      chunkFilename: 'css/[id].[hash].css',
+      filename: 'css/[name].[contenthash].css',
+      chunkFilename: 'css/[id].[contenthash].css',
     }),
     // new BundleAnalyzerPlugin(),
     // new BundleStatsWebpackPlugin(),

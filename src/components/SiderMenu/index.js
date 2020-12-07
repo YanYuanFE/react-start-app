@@ -14,7 +14,7 @@ const SiderMenuWrapper = props => {
         props.onCollapse(!collapsed);
       }}
       open={!collapsed}
-      onMaskClick={() => {
+      onClose={() => {
         props.onCollapse(true);
       }}
     >

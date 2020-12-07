@@ -1,23 +1,19 @@
 const path = require('path');
 const ESLintPlugin = require('eslint-webpack-plugin');
-const HappyPack = require('happypack');
-const os = require('os');
 const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-
-const happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir);
 }
 
-module.exports = {
+const getCommonConfig = (isDevelopment) => ({
   context: path.resolve(__dirname, '../'),
   entry: {
     app: './src/index.js',
   },
   output: {
-    filename: 'js/[name].[hash].js',
+    filename: 'js/[name].[contenthash].js',
     path: path.resolve(__dirname, '../dist'),
     chunkFilename: 'js/[name].bundle.js',
   },
@@ -48,18 +44,20 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: 'happypack/loader?id=jsx',
-        // use: [
-        //   {
-        //     loader: 'thread-loader',
-        //   },
-        //   {
-        //     loader: 'babel-loader',
-        //     options: {
-        //       cacheDirectory: true,
-        //     },
-        //   },
-        // ],
+        use: [
+          {
+            loader: 'thread-loader',
+          },
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: true,
+              plugins: [
+                isDevelopment && require.resolve('react-refresh/babel'),
+              ].filter(Boolean),
+            },
+          },
+        ],
       },
       {
         test: /\.(woff|woff2|eot|ttf)$/,
@@ -86,19 +84,26 @@ module.exports = {
       fix: true,
       lintDirtyModulesOnly: true,
     }),
-    new HappyPack({
-      id: 'jsx',
-      loaders: [{
-        loader: 'babel-loader',
-        options: {
-          cacheDirectory: true,
-          plugins: [require.resolve('react-refresh/babel')],
-        },
-      }],
-      threadPool: happyThreadPool,
-      verbose: true,
-    }),
+    // new HappyPack({
+    //   id: 'jsx',
+    //   loaders: [{
+    //     loader: 'babel-loader',
+    //     options: {
+    //       cacheDirectory: true,
+    //       plugins: [
+    //         isDevelopment && require.resolve('react-refresh/babel'),
+    //       ].filter(Boolean),
+    //     },
+    //   }],
+    //   threadPool: happyThreadPool,
+    //   verbose: true,
+    // }),
     new AntdDayjsWebpackPlugin(),
     new ReactRefreshPlugin(),
   ]
-};
+});
+
+module.exports = {
+  getCommonConfig,
+  resolve,
+}
