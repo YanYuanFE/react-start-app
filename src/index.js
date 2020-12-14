@@ -5,6 +5,9 @@ import { createHashHistory } from 'history';
 // import createHistory from 'history/createBrowserHistory';
 import createLoading from 'dva-loading';
 import {createLogger} from 'redux-logger';
+import globalModel from './models/global';
+import router from './router';
+
 import 'dayjs/locale/zh-cn';
 
 import './index.less';
@@ -20,10 +23,10 @@ app.use({
 });
 
 // 3. Register global model
-app.model(require('./models/global').default);
+app.model(globalModel);
 
 // 4. Router
-app.router(require('./router').default);
+app.router(router);
 
 // 5. Start
 app.start('#root');
@@ -42,5 +45,6 @@ window.onerror = function handleErr(message, source, lineno, colno, error) {
   info.column = column;
   console.dir(info);
 };
+console.log(app);
 
-export default app._store; // eslint-disable-line
+export default app;

@@ -16,7 +16,11 @@ const getCommonConfig = (isDevelopment) => ({
     filename: 'js/[name].[contenthash].js',
     path: path.resolve(__dirname, '../dist'),
     chunkFilename: 'js/[name].bundle.js',
+    // module: true,
   },
+  // experiments: {
+  //   outputModule: true,
+  // },
   optimization: {
     chunkIds: 'named',
   },
