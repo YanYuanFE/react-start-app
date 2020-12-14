@@ -1,4 +1,3 @@
-/* eslint-disable import/no-mutable-exports */
 let CURRENT = 'NULL';
 /**
  * use  authority or getAuthority

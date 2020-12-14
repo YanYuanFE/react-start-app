@@ -5,6 +5,8 @@ import {router} from "dva";
 const { Link } = router;
 
 
-export default () => (
+const ServerError = () => (
   <Exception type="500" style={{ minHeight: 500, height: '80%' }} linkElement={Link} />
 );
+
+export default ServerError;

@@ -14,7 +14,6 @@ const HeaderSearch = (props) => {
     open,
     defaultOpen,
     value: val,
-    onChange,
     ...restProps
   } = props;
 

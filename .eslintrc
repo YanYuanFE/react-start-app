@@ -1,8 +1,25 @@
 {
   "parser": "babel-eslint",
+  "plugins": ["eslint-plugin-react", "eslint-plugin-react-hooks"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "ecmaVersion": 2018,
+      "legacyDecorators": true,
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "polyfills": [
+      "fetch",
+      "promises"
+    ]
+  },
   "extends": [
-    "airbnb",
-    "airbnb/hooks",
+    "eslint:recommended",
+    "plugin:react/recommended",
     "prettier"
   ],
   "env": {
@@ -84,18 +101,6 @@
     "no-use-before-define": [
       0
     ],
-    "jsx-a11y/no-static-element-interactions": [
-      0
-    ],
-    "jsx-a11y/no-noninteractive-element-interactions": [
-      0
-    ],
-    "jsx-a11y/click-events-have-key-events": [
-      0
-    ],
-    "jsx-a11y/anchor-is-valid": [
-      0
-    ],
     "no-nested-ternary": [
       0
     ],
@@ -135,19 +140,6 @@
     ],
     "require-yield": [
       1
-    ]
-  },
-  "parserOptions": {
-    "ecmaFeatures": {
-      "ecmaVersion": 2018,
-      "legacyDecorators": true,
-      "experimentalObjectRestSpread": true
-    }
-  },
-  "settings": {
-    "polyfills": [
-      "fetch",
-      "promises"
     ]
   }
 }

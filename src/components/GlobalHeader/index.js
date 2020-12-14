@@ -126,7 +126,7 @@ export default class GlobalHeader extends PureComponent {
               ]
             }
             onSearch={value => {
-              console.log('input', value); // eslint-disable-line
+              console.log('input', value);
             }}
           />
           <Tooltip title="使用文档">

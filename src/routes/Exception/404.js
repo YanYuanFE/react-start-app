@@ -4,6 +4,8 @@ import Exception from 'components/Exception';
 
 const { Link } = router;
 
-export default () => (
+const NotFoundError = () => (
   <Exception type="404" style={{ minHeight: 500, height: '80%' }} linkElement={Link} />
 );
+
+export default NotFoundError;
