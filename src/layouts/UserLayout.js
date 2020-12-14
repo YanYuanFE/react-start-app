@@ -1,7 +1,7 @@
 import React from 'react';
 import { router } from 'dva';
-import DocumentTitle from 'react-document-title';
 import {CopyrightOutlined} from "@ant-design/icons";
+import {DocumentTitle} from '../components/DocumentTitle';
 import GlobalFooter from '../components/GlobalFooter';
 import styles from './UserLayout.less';
 import logo from '../assets/logo.svg';

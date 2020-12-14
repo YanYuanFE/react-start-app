@@ -1,10 +1,10 @@
 import React from 'react';
 import { Layout, message } from 'antd';
 import {CopyrightOutlined, GithubOutlined} from "@ant-design/icons";
-import DocumentTitle from 'react-document-title';
 import { router, routerRedux, useSelector, useDispatch, useLocation, useRouteMatch } from 'dva';
 import {pathToRegexp} from 'path-to-regexp';
 import { useMediaQuery } from 'react-responsive';
+import {DocumentTitle} from '../components/DocumentTitle';
 import GlobalHeader from '../components/GlobalHeader';
 import GlobalFooter from '../components/GlobalFooter';
 import SiderMenu from '../components/SiderMenu';

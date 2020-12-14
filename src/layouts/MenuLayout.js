@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Layout, Icon, message } from 'antd';
-import DocumentTitle from 'react-document-title';
 import { connect, router, routerRedux } from 'dva';
 import pathToRegexp from 'path-to-regexp';
+import {DocumentTitle} from '../components/DocumentTitle';
 import GlobalFooter from '../components/GlobalFooter';
 import HeaderMenu from '../components/HeaderMenu';
 import NotFound from '../routes/Exception/404';
