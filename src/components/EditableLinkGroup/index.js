@@ -1,48 +1,30 @@
-import React, { PureComponent, createElement } from 'react';
+import React, { createElement } from 'react';
 import { PlusOutlined } from '@ant-design/icons';
-import PropTypes from 'prop-types';
 import { Button } from 'antd';
 import styles from './index.less';
 
-// TODO: 添加逻辑
+const EditableLinkGroup = ({links = [], onAdd = () => {}, linkElement = "a"}) => {
 
-class EditableLinkGroup extends PureComponent {
-  static propTypes = {
-    links: PropTypes.array,
-    onAdd: PropTypes.func,
-    linkElement: PropTypes.any,
-  };
-
-  static defaultProps = {
-    links: [],
-    onAdd: () => {},
-    linkElement: 'a',
-  };
-
-  render() {
-    const { links, linkElement, onAdd } = this.props;
-    console.log(linkElement)
-    return (
-      <div className={styles.linkGroup}>
-        {links.map(link =>
-          createElement(
-            linkElement,
-            {
-              key: `linkGroup-item-${link.id || link.title}`,
-              to: link.href,
-              href: link.href,
-            },
-            link.title
-          )
-        )}
-        {
-          <Button size="small" type="primary" ghost onClick={onAdd} icon={<PlusOutlined />}>
-            添加
-          </Button>
-        }
-      </div>
-    );
-  }
+  return (
+    <div className={styles.linkGroup}>
+      {links.map(link =>
+        createElement(
+          linkElement,
+          {
+            key: `linkGroup-item-${link.id || link.title}`,
+            to: link.href,
+            href: link.href,
+          },
+          link.title
+        )
+      )}
+      {
+        <Button size="small" type="primary" ghost onClick={onAdd} icon={<PlusOutlined />}>
+          添加
+        </Button>
+      }
+    </div>
+  );
 }
 
 export default EditableLinkGroup;

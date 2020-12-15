@@ -17,7 +17,7 @@ const dynamicWrapper = (app, models, component) => {
       return import(`../models/${model}`);
     }),
     component,
-    LoadingComponent: <Spin size="large" className="global-spin" />,
+    // LoadingComponent: <Spin size="large" className="global-spin" />,
   })
 };
 
@@ -63,7 +63,6 @@ export const getRouterData = app => {
       component: dynamicWrapper(app, [], () => import('../routes/Dashboard/Workplace')),
       hideInBreadcrumb: true,
       name: '工作台',
-      authority: 'admin',
     },
     // '/form/basic-form': {
     //   component: dynamicWrapper(app, ['form'], () => import('../routes/Forms/BasicForm')),
