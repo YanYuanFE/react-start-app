@@ -19,7 +19,7 @@ const actions = (
   </div>
 );
 
-export default ({ location }) => (
+const RegisterResult = ({ location }) => (
   <Result
     className={styles.registerResult}
     type="success"
@@ -33,3 +33,5 @@ export default ({ location }) => (
     style={{ marginTop: 56 }}
   />
 );
+
+export default RegisterResult;

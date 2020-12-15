@@ -1,3 +1,5 @@
 import React from 'react';
 
-export default props => <div {...props} />;
+const BlankLayout = props => <div {...props} />;
+
+export default BlankLayout;

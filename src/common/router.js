@@ -5,7 +5,6 @@ import dynamic from 'dva/dynamic';
 import { getMenuData } from './menu';
 
 export const modelNotExisted = (app, model) =>
-  // eslint-disable-next-line
   !app._models.some(({ namespace }) => {
     return namespace === model.substring(model.lastIndexOf('/') + 1);
   });
@@ -18,6 +17,7 @@ const dynamicWrapper = (app, models, component) => {
       return import(`../models/${model}`);
     }),
     component,
+    LoadingComponent: <Spin size="large" className="global-spin" />,
   })
 };
 

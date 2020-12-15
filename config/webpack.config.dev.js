@@ -15,7 +15,7 @@ const theme = getThemeConfig();
 
 const mergedConfig = merge(getCommonConfig(true), {
   mode: 'development',
-  devtool: 'inline-cheap-module-source-map',
+  devtool: 'eval-cheap-module-source-map',
   performance: {
     hints: false,
   },
@@ -118,36 +118,6 @@ const mergedConfig = merge(getCommonConfig(true), {
       filename: 'index.html',
       favicon: resolve('favicon.ico'),
     }),
-    // new HappyPack({
-    //   id: 'styles',
-    //   loaders: [
-    //     {
-    //       loader: 'style-loader',
-    //     },
-    //     {
-    //       loader: 'css-loader',
-    //       options: {
-    //         importLoaders: 2,
-    //       },
-    //     },
-    //     {
-    //       loader: 'postcss-loader',
-    //     },
-    //     {
-    //       loader: 'less-loader',
-    //       options: {
-    //         lessOptions: {
-    //           // strictMath: false,
-    //           // noIeCompat: true,
-    //           javascriptEnabled: true,
-    //           modifyVars: theme,
-    //         }
-    //       },
-    //     },
-    //   ],
-    //   threadPool: happyThreadPool,
-    //   verbose: true,
-    // }),
   ],
 });
 

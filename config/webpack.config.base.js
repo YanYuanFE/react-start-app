@@ -9,6 +9,7 @@ function resolve(dir) {
 
 const getCommonConfig = (isDevelopment) => ({
   context: path.resolve(__dirname, '../'),
+  target: 'web',
   entry: {
     app: './src/index.js',
   },
@@ -88,20 +89,6 @@ const getCommonConfig = (isDevelopment) => ({
       fix: true,
       lintDirtyModulesOnly: true,
     }),
-    // new HappyPack({
-    //   id: 'jsx',
-    //   loaders: [{
-    //     loader: 'babel-loader',
-    //     options: {
-    //       cacheDirectory: true,
-    //       plugins: [
-    //         isDevelopment && require.resolve('react-refresh/babel'),
-    //       ].filter(Boolean),
-    //     },
-    //   }],
-    //   threadPool: happyThreadPool,
-    //   verbose: true,
-    // }),
     new AntdDayjsWebpackPlugin(),
     new ReactRefreshPlugin(),
   ]

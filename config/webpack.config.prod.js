@@ -5,7 +5,6 @@ const TerserPlugin = require('terser-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-// const { BundleStatsWebpackPlugin } = require('bundle-stats-webpack-plugin');
 
 const {getCommonConfig, resolve} = require('./webpack.config.base');
 const getThemeConfig = require('../theme.js');
@@ -164,6 +163,5 @@ module.exports = merge(getCommonConfig(false), {
       chunkFilename: 'css/[id].[contenthash].css',
     }),
     // new BundleAnalyzerPlugin(),
-    // new BundleStatsWebpackPlugin(),
   ],
 });

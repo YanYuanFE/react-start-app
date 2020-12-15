@@ -1,10 +1,8 @@
 import dva from 'dva';
-
 import { createHashHistory } from 'history';
-// user BrowserHistory
-// import createHistory from 'history/createBrowserHistory';
 import createLoading from 'dva-loading';
 import {createLogger} from 'redux-logger';
+
 import globalModel from './models/global';
 import router from './router';
 
@@ -30,21 +28,5 @@ app.router(router);
 
 // 5. Start
 app.start('#root');
-
-window.onerror = function handleErr(message, source, lineno, colno, error) {
-  console.dir(error);
-  const info = {
-    message: error.message,
-    name: error.name,
-  };
-  const { stack } = error;
-  const matchUrl = stack.match(/http:\/\/[^\n]*/)[0];
-  [info.fileName] = matchUrl.match(/http:\/\/(?:\S*)\.js/);
-  const [, row, column] = matchUrl.match(/:(\d+):(\d+)/);
-  info.row = row;
-  info.column = column;
-  console.dir(info);
-};
-console.log(app);
 
 export default app;
