@@ -2,6 +2,7 @@ const path = require('path');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const WebpackBar = require('webpackbar');
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir);
@@ -91,6 +92,7 @@ const getCommonConfig = (isDevelopment) => ({
     }),
     new AntdDayjsWebpackPlugin(),
     new ReactRefreshPlugin(),
+    new WebpackBar(),
   ]
 });
 

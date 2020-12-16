@@ -10,6 +10,8 @@ export const modelNotExisted = (app, model) =>
   });
 
 // wrapper of dynamic
+
+const Loading = () => <Spin size="large" className="global-spin" />;
 const dynamicWrapper = (app, models, component) => {
   return dynamic({
     app,
@@ -17,7 +19,7 @@ const dynamicWrapper = (app, models, component) => {
       return import(`../models/${model}`);
     }),
     component,
-    // LoadingComponent: <Spin size="large" className="global-spin" />,
+    LoadingComponent: Loading,
   })
 };
 
