@@ -1,7 +1,7 @@
 import React from 'react';
 import { router, routerRedux } from 'dva';
 import { ConfigProvider } from 'antd';
-import zhCN from 'antd/lib/locale-provider/zh_CN';
+// import zhCN from 'antd/es/locale-provider/zh_CN';
 import { getRouterData } from './common/router';
 import Authorized from './utils/Authorized';
 import { getQueryPath } from './utils/utils';
@@ -16,7 +16,7 @@ function RouterConfig(api) {
   const UserLayout = routerData['/user'].component;
   const BasicLayout = routerData['/'].component;
   return (
-    <ConfigProvider locale={zhCN}>
+    <ConfigProvider>
       <ConnectedRouter history={history}>
         <Switch>
           <Route path="/user" render={props => <UserLayout {...props} routerData={routerData} />} />

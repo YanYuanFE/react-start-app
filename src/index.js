@@ -6,8 +6,6 @@ import {createLogger} from 'redux-logger';
 import globalModel from './models/global';
 import router from './router';
 
-import 'dayjs/locale/zh-cn';
-
 import './index.less';
 // 1. Initialize
 const app = dva({
