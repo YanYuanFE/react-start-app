@@ -1,7 +1,7 @@
 import React from 'react';
 import { router, routerRedux } from 'dva';
 import { ConfigProvider } from 'antd';
-import zhCN from 'antd/lib/locale-provider/zh_CN';
+import zhCN from 'antd/es/locale-provider/zh_CN';
 import { getRouterData } from './common/router';
 import Authorized from './utils/Authorized';
 import { getQueryPath } from './utils/utils';
