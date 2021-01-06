@@ -5,9 +5,9 @@ import {DocumentTitle} from '../components/DocumentTitle';
 import GlobalFooter from '../components/GlobalFooter';
 import styles from './UserLayout.less';
 import logo from '../assets/logo.svg';
-import { getRoutes } from '../utils/utils';
+import {getPageTitle} from "@ant-design/pro-layout";
 
-const { Link, Redirect, Switch, Route } = router;
+const { Link } = router;
 
 const links = [
   {
@@ -33,18 +33,13 @@ const copyright = (
   </>
 );
 
-const UserLayout = ({ routerData, location, match }) => {
-  const getPageTitle = () => {
-    const { pathname } = location;
-    let title = 'Ant Design Pro';
-    if (routerData[pathname] && routerData[pathname].name) {
-      title = `${routerData[pathname].name} - Ant Design Pro`;
-    }
-    return title;
-  }
+const UserLayout = ({ location, children }) => {
+  const title = getPageTitle({
+    pathname: location.pathname,
+  });
 
   return (
-    <DocumentTitle title={getPageTitle()}>
+    <DocumentTitle title={title}>
       <div className={styles.container}>
         <div className={styles.content}>
           <div className={styles.top}>
@@ -56,17 +51,7 @@ const UserLayout = ({ routerData, location, match }) => {
             </div>
             <div className={styles.desc}>Ant Design 是西湖区最具影响力的 Web 设计规范</div>
           </div>
-          <Switch>
-            {getRoutes(match.path, routerData).map(item => (
-              <Route
-                key={item.key}
-                path={item.path}
-                component={item.component}
-                exact={item.exact}
-              />
-            ))}
-            <Redirect exact from="/user" to="/user/login" />
-          </Switch>
+          {children}
         </div>
         <GlobalFooter links={links} copyright={copyright} />
       </div>
