@@ -64,77 +64,69 @@ module.exports = merge(getCommonConfig(false), {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-              sourceMap: true,
-            },
-          },
-          'postcss-loader',
-        ],
-      },
-      {
-        test: /.less$/,  // antd 中的less
-        include: resolve('node_modules'),
-        // exclude: [/src/],
-        // include: path.resolve(__dirname, 'node_modules/antd'),
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-          {
-            loader: 'less-loader',
-            options: {
-              lessOptions: {
-                strictMath: false,
-                noIeCompat: true,
-                javascriptEnabled: true,
-                modifyVars: theme,
-              }
-            },
-          },
-        ],
-      },
-      {
         test: /\.less$/,
-        include: resolve('src'),
-        // exclude: [/node_modules/],
-        use: [
-          MiniCssExtractPlugin.loader,
+        oneOf: [
           {
-            loader: 'css-loader',
-            options: {
-              modules: {
-                localIdentName: '[local]--[contenthash:base64:5]',
+            resourceQuery: /modules/,
+            use: [
+              {
+                loader: MiniCssExtractPlugin.loader,
+                options: {
+                  esModule: false,
+                  publicPath: "../",
+                },
               },
-              importLoaders: 2,
-            },
+              {
+                loader: "css-loader",
+                options: {
+                  importLoaders: 2,
+                  esModule: false,
+                  modules: {
+                    localIdentName: "[local]--[contenthash:base64:5]",
+                  },
+                },
+              },
+              {
+                loader: "postcss-loader",
+              },
+              {
+                loader: "less-loader",
+                options: {
+                  lessOptions: {
+                    strictMath: false,
+                    noIeCompat: true,
+                    javascriptEnabled: true,
+                  },
+                },
+              },
+            ],
           },
-          'postcss-loader',
           {
-            loader: 'less-loader',
-            options: {
-              lessOptions: {
-                strictMath: false,
-                noIeCompat: true,
-                javascriptEnabled: true,
-                modifyVars: theme,
-              }
-            },
+            use: [
+              {
+                loader: MiniCssExtractPlugin.loader,
+              },
+              {
+                loader: "css-loader",
+                options: {
+                  importLoaders: 2,
+                },
+              },
+              {
+                loader: "postcss-loader",
+              },
+              {
+                loader: "less-loader",
+                options: {
+                  lessOptions: {
+                    strictMath: false,
+                    noIeCompat: true,
+                    javascriptEnabled: true,
+                  },
+                },
+              },
+            ],
           },
-        ],
-      },
-      {
-        test: /\.s[ac]ss$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'postcss-loader',
-          'sass-loader',
         ],
       },
     ],

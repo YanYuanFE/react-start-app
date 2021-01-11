@@ -27,6 +27,7 @@
         "libraryName": "antd",
         "style": true
       }
-    ]
+    ],
+    ["@umijs/babel-plugin-auto-css-modules"]
   ]
 }

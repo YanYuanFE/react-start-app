@@ -1351,6 +1351,11 @@
     "@types/webpack-sources" "*"
     source-map "^0.6.0"
 
+"@umijs/babel-plugin-auto-css-modules@^3.3.4":
+  version "3.3.4"
+  resolved "https://registry.npmjs.org/@umijs/babel-plugin-auto-css-modules/-/babel-plugin-auto-css-modules-3.3.4.tgz#560925d7e07bf47fbcae3a4c164b8c2fcff94110"
+  integrity sha512-t9DOYvyUbz6XSlZ1aqknTZMHRD2l7r2qZsHt1awsYK8QqmWNSN5152kwlIkO5aHxwrLJqR7Gs0rQW2h3mXRieg==
+
 "@umijs/route-utils@^1.0.33":
   version "1.0.34"
   resolved "https://registry.npmjs.org/@umijs/route-utils/-/route-utils-1.0.34.tgz#663d020669217dd7e8431a1b9ce9abea5fbbb6b8"

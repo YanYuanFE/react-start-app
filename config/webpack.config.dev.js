@@ -28,80 +28,59 @@ const mergedConfig = merge(getCommonConfig(true), {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: [
+        test: /.less$/,
+        oneOf: [
           {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-            // options: {
-            //   modules: true,
-            //   localIdentName: '[local]--[hash:base64:5]',
-            // },
-          },
-        ],
-      },
-      {
-        test: /.less$/,  // antd 中的less
-        include: /node_modules/,
-        // include: path.resolve(__dirname, 'node_modules/antd'),
-        // use: 'happypack/loader?id=styles',
-        use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 2,
-            },
-          },
-          {
-            loader: 'postcss-loader',
-          },
-          {
-            loader: 'less-loader',
-            options: {
-              lessOptions: {
-                // strictMath: false,
-                // noIeCompat: true,
-                javascriptEnabled: true,
-                modifyVars: theme,
-              }
-            },
-          },
-        ],
-      },
-      {
-        test: /\.less$/,
-        // exclude: path.resolve(__dirname, 'node_modules'),
-        include: /src/,
-        use: [
-          {
-            loader: 'style-loader',
-          },
-          {
-            loader: 'css-loader',
-            options: {
-              modules: {
-                localIdentName: '[local]--[contenthash:base64:5]',
+            resourceQuery: /modules/,
+            use: [
+              {
+                loader: "style-loader",
               },
-              importLoaders: 2,
-            },
+              {
+                loader: "css-loader",
+                options: {
+                  modules: {
+                    localIdentName: "[local]--[contenthash:base64:5]",
+                  },
+                },
+              },
+              {
+                loader: "postcss-loader",
+              },
+              {
+                loader: "less-loader",
+                options: {
+                  lessOptions: {
+                    strictMath: false,
+                    noIeCompat: true,
+                    javascriptEnabled: true,
+                  },
+                },
+              },
+            ],
           },
           {
-            loader: 'postcss-loader',
-          },
-          {
-            loader: 'less-loader',
-            options: {
-              lessOptions: {
-                strictMath: false,
-                noIeCompat: true,
-                javascriptEnabled: true,
-              }
-            },
+            use: [
+              {
+                loader: "style-loader",
+              },
+              {
+                loader: "css-loader",
+              },
+              {
+                loader: "postcss-loader",
+              },
+              {
+                loader: "less-loader",
+                options: {
+                  lessOptions: {
+                    strictMath: false,
+                    noIeCompat: true,
+                    javascriptEnabled: true,
+                  },
+                },
+              },
+            ],
           },
         ],
       },
