@@ -11,6 +11,7 @@
 *  Ant Design 4.x and Ant Pro
 *  dva
 *  Webpack 5.x
+*  axios
 
 ## 特性
 *  :gem: 基于 React，Ant Design，dva 等企业级后台管理系统最佳实践。
@@ -30,7 +31,7 @@
 ├── /src/            # 项目源码目录
 │ ├── /assets/       # 图片资源
 │ ├── /common/       # 公共配置文件，菜单、路由
-│ │ ├── munu.js      # 侧边栏菜单配置
+│ │ ├── setting.js      # 配置
 │ │ └── router.js    # 路由配置
 │ ├── /components/   # UI组件
 │ ├── /layouts/      # 布局组件

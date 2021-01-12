@@ -1,5 +1,5 @@
 import React from 'react';
-import Exception from 'components/Exception';
+import Exception from '@/components/Exception';
 import {router} from "dva";
 
 const { Link } = router;

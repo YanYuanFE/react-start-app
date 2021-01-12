@@ -32,14 +32,7 @@ const getCommonConfig = (isDevelopment) => ({
     modules: ['node_modules', path.resolve(__dirname, 'src')],
     alias: {
       lodash$: "lodash-es",
-      src: resolve('src'),
-      assets: resolve('assets'),
-      models: resolve('src/models'),
-      utils: resolve('src/utils'),
-      layouts: resolve('src/layouts'),
-      services: resolve('src/services'),
-      components: resolve('src/components'),
-      common: resolve('src/common'),
+      "@": resolve('src'),
     },
   },
   module: {

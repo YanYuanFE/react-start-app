@@ -1,6 +1,6 @@
 import React from 'react';
 import { router } from 'dva';
-import Exception from 'components/Exception';
+import Exception from '@/components/Exception';
 
 const { Link } = router;
 

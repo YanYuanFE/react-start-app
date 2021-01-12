@@ -2,7 +2,7 @@ import React from 'react';
 import { Row, Col, Card, List, Avatar } from 'antd';
 import {router} from "dva";
 
-import EditableLinkGroup from 'components/EditableLinkGroup';
+import EditableLinkGroup from '@/components/EditableLinkGroup';
 import PageHeaderLayout from '../../layouts/PageHeaderLayout';
 import styles from './Workplace.less';
 

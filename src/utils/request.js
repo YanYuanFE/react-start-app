@@ -1,5 +1,5 @@
 import { notification } from 'antd';
-import { routerRedux, fetch } from 'dva';
+import axios from 'axios';
 import store from '../index';
 
 const codeMessage = {
@@ -19,7 +19,8 @@ const codeMessage = {
   503: '服务不可用，服务器暂时过载或维护。',
   504: '网关超时。',
 };
-function checkStatus(response) {
+
+export function checkStatus(response) {
   if (response.status >= 200 && response.status < 300) {
     return response;
   }
@@ -34,62 +35,56 @@ function checkStatus(response) {
   throw error;
 }
 
-/**
- * Requests a URL, returning a promise.
- *
- * @param  {string} url       The URL we want to request
- * @param  {object} [options] The options we want to pass to "fetch"
- * @return {object}           An object containing either "data" or "err"
- */
-export default function request(url, options) {
-  const defaultOptions = {
-    credentials: 'include',
-  };
-  const newOptions = { ...defaultOptions, ...options };
-  if (newOptions.method === 'POST' || newOptions.method === 'PUT') {
-    if (!(newOptions.body instanceof FormData)) {
-      newOptions.headers = {
-        Accept: 'application/json',
-        'Content-Type': 'application/json; charset=utf-8',
-        ...newOptions.headers,
-      };
-      newOptions.body = JSON.stringify(newOptions.body);
-    } else {
-      // newOptions.body is FormData
-      newOptions.headers = {
-        Accept: 'application/json',
-        ...newOptions.headers,
-      };
-    }
-  }
+// 创建 axios 实例
+const request = axios.create({
+  // API 请求的默认前缀
+  baseURL: process.env.API_BASE_URL || "/api",
+  timeout: 6000, // 请求超时时间
+  credentials: 'include',
+});
 
-  return fetch(url, newOptions)
-    .then(checkStatus)
-    .then(response => {
-      if (newOptions.method === 'DELETE' || response.status === 204) {
-        return response.text();
-      }
-      return response.json();
-    })
-    .catch(e => {
-      const { dispatch } = store;
-      const status = e.name;
-      if (status === 401) {
+// 异常拦截处理器
+const errorHandler = (error) => {
+  if (error.response) {
+    const data = error.response.data
+    // 从 localstorage 获取 token
+    const token = localStorage.get("ACCESS_TOKEN")
+    if (error.response.status === 403) {
+      notification.error({
+        message: 'Forbidden',
+        description: data.message,
+      })
+    }
+    if (error.response.status === 401 && !(data.result && data.result.isLogin)) {
+      notification.error({
+        message: 'Unauthorized',
+        description: 'Authorization verification failed',
+      })
+      if (token) {
+        const { dispatch } = store;
         dispatch({
           type: 'login/logout',
         });
-        return;
       }
-      if (status === 403) {
-        dispatch(routerRedux.push('/exception/403'));
-        return;
-      }
-      if (status <= 504 && status >= 500) {
-        dispatch(routerRedux.push('/exception/500'));
-        return;
-      }
-      if (status >= 404 && status < 422) {
-        dispatch(routerRedux.push('/exception/404'));
-      }
-    });
+    }
+  }
+  return Promise.reject(error);
 }
+
+// request interceptor
+request.interceptors.request.use(config => {
+  const token = localStorage.get("ACCESS_TOKEN");
+  // 如果 token 存在
+  // 让每个请求携带自定义 token 请根据实际情况自行修改
+  if (token) {
+    config.headers['Access-Token'] = token;
+  }
+  return config;
+}, errorHandler);
+
+// response interceptor
+request.interceptors.response.use((response) => {
+  return response.data;
+}, errorHandler);
+
+export default request;

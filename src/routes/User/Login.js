@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {connect, router, useDispatch} from 'dva';
 import { Checkbox, Alert } from 'antd';
 import {AlipayCircleOutlined, TaobaoCircleOutlined, WeiboCircleOutlined} from "@ant-design/icons";
-import Login from 'components/Login';
+import Login from '@/components/Login';
 import styles from './Login.less';
 
 const { Link } = router;
