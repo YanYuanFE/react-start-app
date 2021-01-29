@@ -140,6 +140,7 @@
     ],
     "require-yield": [
       1
-    ]
+    ],
+    "react/jsx-no-target-blank": 0
   }
 }
