@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const {getCommonConfig, resolve} = require('./webpack.config.base');
 const getThemeConfig = require('../theme.js');
@@ -154,6 +154,6 @@ module.exports = merge(getCommonConfig(false), {
       filename: 'css/[name].[contenthash].css',
       chunkFilename: 'css/[id].[contenthash].css',
     }),
-    // new BundleAnalyzerPlugin(),
+    new BundleAnalyzerPlugin(),
   ],
 });

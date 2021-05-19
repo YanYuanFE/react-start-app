@@ -1,7 +1,6 @@
 const path = require('path');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
-const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const WebpackBar = require('webpackbar');
 // const { ESBuildPlugin } = require('esbuild-loader');
 
@@ -29,7 +28,7 @@ const getCommonConfig = (isDevelopment) => ({
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
-    modules: ['node_modules', path.resolve(__dirname, 'src')],
+    modules: ['node_modules', resolve('./src')],
     alias: {
       lodash$: "lodash-es",
       "@": resolve('src'),
@@ -93,7 +92,6 @@ const getCommonConfig = (isDevelopment) => ({
       lintDirtyModulesOnly: true,
     }),
     new AntdDayjsWebpackPlugin(),
-    new ReactRefreshPlugin(),
     new WebpackBar(),
     // new ESBuildPlugin()
   ]

@@ -2,11 +2,13 @@ const path = require('path');
 const {merge} = require('webpack-merge');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
+const ReactRefreshPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const {getCommonConfig, resolve} = require('./webpack.config.base');
 const getThemeConfig = require('../theme.js');
-// const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
-// const smp = new SpeedMeasurePlugin();
+
+const SpeedMeasurePlugin = require("speed-measure-webpack-plugin");
+const smp = new SpeedMeasurePlugin();
+
 // const Dashboard = require('webpack-dashboard');
 // const DashboardPlugin = require('webpack-dashboard/plugin');
 // const dashboard = new Dashboard();
@@ -88,6 +90,7 @@ const mergedConfig = merge(getCommonConfig(true), {
   },
   plugins: [
     // new DashboardPlugin(dashboard.setData),
+    new ReactRefreshPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.EnvironmentPlugin({
       NODE_ENV: "development",
@@ -100,5 +103,5 @@ const mergedConfig = merge(getCommonConfig(true), {
   ],
 });
 
-// module.exports = smp.wrap(mergedConfig);
-module.exports = mergedConfig;
+module.exports = smp.wrap(mergedConfig);
+// module.exports = mergedConfig;

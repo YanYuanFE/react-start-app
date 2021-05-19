@@ -4,14 +4,20 @@
     [
       "@babel/preset-env",
       {
-        "modules": false
+        "targets": {
+          "safari": 12,
+          "esmodules": true
+        },
+        "bugfixes": true,
+        "modules": false,
+        "useBuiltIns": "usage",
+        "corejs": 3
       }
     ]
   ],
   "plugins": [
     ["@babel/plugin-proposal-decorators", { "legacy": true }],
     "@babel/plugin-syntax-dynamic-import",
-    ["@babel/plugin-proposal-class-properties", { "loose": true }],
     [
       "@babel/plugin-transform-runtime",
       {
