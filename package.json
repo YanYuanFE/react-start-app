@@ -8,7 +8,8 @@
     "build": "cross-env NODE_ENV=production webpack --progress --config ./config/webpack.config.prod.js",
     "lint": "eslint --ext .js --ext .jsx src/",
     "fix": "eslint --fix --ext .js,.jsx src",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "upgrade": "yarn upgrade-interactive --latest"
   },
   "lint-staged": {
     "src/**/*.js": [
