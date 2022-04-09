@@ -29,7 +29,7 @@
     "dva-loading": "^3.0.22",
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.21",
-    "moment": "^2.29.1",
+    "moment": "^2.29.2",
     "path-to-regexp": "^6.2.0",
     "prop-types": "^15.7.2",
     "rc-drawer": "^4.3.1",
